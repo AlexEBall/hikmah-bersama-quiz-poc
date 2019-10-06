@@ -13,7 +13,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('OpenTrivia'),
+          title: Text('Mindful Philanthopy'),
           elevation: 0,
         ),
         body: Stack(
@@ -23,39 +23,31 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Container(
                 decoration:
                     BoxDecoration(color: Theme.of(context).primaryColor),
-                height: 200,
+                height: 100,
               ),
             ),
-            CustomScrollView(
-              physics: BouncingScrollPhysics(),
-              slivers: <Widget>[
-                SliverToBoxAdapter(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 16.0, vertical: 8.0),
-                    child: Text(
-                      "Select a category to start the quiz",
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w500,
-                          fontSize: 16.0),
+            Container(
+              margin: EdgeInsets.only(left: 20.0),
+              width: 100,
+              height: 100,
+              child: MaterialButton(
+                elevation: 1.0,
+                highlightElevation: 1.0,
+                onPressed: () => _categoryPressed(context),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+                color: Theme.of(context).accentColor,
+                textColor: Colors.white70,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text(
+                      'Donate to a charity',
                     ),
-                  ),
+                  ],
                 ),
-                SliverPadding(
-                  padding: const EdgeInsets.all(16.0),
-                  sliver: SliverGrid(
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 3,
-                          childAspectRatio: 1.2,
-                          crossAxisSpacing: 10.0,
-                          mainAxisSpacing: 10.0),
-                      delegate: SliverChildBuilderDelegate(
-                        _buildCategoryItem,
-                        childCount: 1,
-                      )),
-                ),
-              ],
+              ),
             ),
           ],
         ));
