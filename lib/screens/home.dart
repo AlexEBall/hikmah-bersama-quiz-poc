@@ -1,5 +1,10 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
+
+import './error.dart';
+import '../models/question.dart';
+import '../services/quiz_api_provider.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String id = 'home_screen';
@@ -9,6 +14,64 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  bool processing;
+
+  @override
+  void initState() {
+    super.initState();
+    processing = false;
+  }
+
+  void _startQuiz() async {
+    setState(() {
+      processing = true;
+    });
+    try {
+      List<Question> questions = await getQuestions();
+      Navigator.pop(context);
+
+      if (questions.length < 1) {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (_) => ErrorPage(
+              message:
+                  "There are not enough questions in the category, with the options you selected.",
+            ),
+          ),
+        );
+        return;
+      }
+
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (_) => QuizPage(
+            questions: questions,
+          ),
+        ),
+      );
+    } on SocketException catch (_) {
+      Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+              builder: (_) => ErrorPage(
+                    message:
+                        "Can't reach the servers, \n Please check your internet connection.",
+                  )));
+    } catch (e) {
+      print(e.message);
+      Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+              builder: (_) => ErrorPage(
+                    message: "Unexpected error trying to connect to the API",
+                  )));
+    }
+    setState(() {
+      processing = false;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,7 +95,7 @@ class _HomeScreenState extends State<HomeScreen> {
             child: MaterialButton(
               elevation: 1.0,
               highlightElevation: 1.0,
-              onPressed: () => _categoryPressed(context),
+              onPressed: () => _startQuiz(),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10.0),
               ),
@@ -49,16 +112,6 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
         ],
-      ),
-    );
-  }
-
-  _categoryPressed(BuildContext context) {
-    showModalBottomSheet(
-      context: context,
-      builder: (sheetContext) => BottomSheet(
-        builder: (_) => Text('Bottom Sheet'),
-        onClosing: () {},
       ),
     );
   }
