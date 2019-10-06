@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 
 import './error.dart';
+import './quiz.dart';
 import '../models/question.dart';
 import '../services/quiz_api_provider.dart';
 
@@ -45,7 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (_) => QuizPage(
+          builder: (_) => QuizScreen(
             questions: questions,
           ),
         ),
