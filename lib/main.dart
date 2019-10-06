@@ -11,8 +11,16 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Hikmah / Bersams Quiz POC',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+          primarySwatch: Colors.blue,
+          accentColor: Colors.indigo,
+          fontFamily: "Montserrat",
+          buttonColor: Colors.pink,
+          buttonTheme: ButtonThemeData(
+              buttonColor: Colors.pink,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20.0),
+              ),
+              textTheme: ButtonTextTheme.primary)),
       initialRoute: HomeScreen.id,
       routes: {
         HomeScreen.id: (context) => HomeScreen(),
