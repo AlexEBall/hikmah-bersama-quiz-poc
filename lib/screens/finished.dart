@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../models/question.dart';
 
 import './home.dart';
-// import 'package:opentrivia/ui/pages/check_answers.dart';
+import './check_answers.dart';
 
 class QuizFinishedPage extends StatelessWidget {
   static const String id = 'finished_screen';
@@ -109,11 +109,14 @@ class QuizFinishedPage extends StatelessWidget {
                     color: Theme.of(context).primaryColor,
                     child: Text("Check Answers"),
                     onPressed: () {
-                      // Navigator.of(context).push(MaterialPageRoute(
-                      //     builder: (_) => CheckAnswersPage(
-                      //           questions: questions,
-                      //           answers: answers,
-                      //         )));
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (_) => CheckAnswersScreen(
+                            questions: questions,
+                            answers: answers,
+                          ),
+                        ),
+                      );
                     },
                   ),
                 ],
