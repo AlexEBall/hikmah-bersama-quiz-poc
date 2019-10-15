@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../models/question.dart';
+import './finished.dart';
 
 class QuizScreen extends StatefulWidget {
   static const String id = 'quiz_screen';
