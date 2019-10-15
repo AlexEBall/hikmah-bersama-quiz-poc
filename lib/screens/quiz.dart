@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
+import 'package:html_unescape/html_unescape.dart';
 
 import '../models/question.dart';
 import './finished.dart';
@@ -35,6 +37,8 @@ class _QuizScreenState extends State<QuizScreen> {
       options.add(question.correctAnswer);
       options.shuffle();
     }
+
+    print(options);
 
     void _nextSubmit() {
       if (_answers[_currentIndex] == null) {
@@ -86,7 +90,7 @@ class _QuizScreenState extends State<QuizScreen> {
       child: Scaffold(
         key: _key,
         appBar: AppBar(
-          title: Text(widget.category.name),
+          title: Text('Hey'),
           elevation: 0,
         ),
         body: Stack(
@@ -125,16 +129,18 @@ class _QuizScreenState extends State<QuizScreen> {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
-                        ...options.map((option) => RadioListTile(
-                              title: Text(HtmlUnescape().convert("$option")),
-                              groupValue: _answers[_currentIndex],
-                              value: option,
-                              onChanged: (value) {
-                                setState(() {
-                                  _answers[_currentIndex] = option;
-                                });
-                              },
-                            )),
+                        ...options.map(
+                          (option) => RadioListTile(
+                            title: Text(HtmlUnescape().convert("$option")),
+                            groupValue: _answers[_currentIndex],
+                            value: option,
+                            onChanged: (value) {
+                              setState(() {
+                                _answers[_currentIndex] = option;
+                              });
+                            },
+                          ),
+                        ),
                       ],
                     ),
                   ),

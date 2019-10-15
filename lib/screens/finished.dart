@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import '../models/question.dart';
+
+import './home.dart';
 // import 'package:opentrivia/ui/pages/check_answers.dart';
 
 class QuizFinishedPage extends StatelessWidget {
@@ -7,7 +9,7 @@ class QuizFinishedPage extends StatelessWidget {
   final List<Question> questions;
   final Map<int, dynamic> answers;
 
-  int correctAnswers;
+  // final int correctAnswers;
 
   QuizFinishedPage({@required this.questions, @required this.answers});
 
@@ -89,15 +91,15 @@ class QuizFinishedPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   RaisedButton(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 16.0, vertical: 20.0),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                    color: Theme.of(context).accentColor.withOpacity(0.8),
-                    child: Text("Goto Home"),
-                    onPressed: () => Navigator.pop(context),
-                  ),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 16.0, vertical: 20.0),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      color: Theme.of(context).accentColor.withOpacity(0.8),
+                      child: Text("Go Home"),
+                      onPressed: () =>
+                          Navigator.pushNamed(context, HomeScreen.id)),
                   RaisedButton(
                     padding: const EdgeInsets.symmetric(
                         horizontal: 16.0, vertical: 20.0),
@@ -107,11 +109,11 @@ class QuizFinishedPage extends StatelessWidget {
                     color: Theme.of(context).primaryColor,
                     child: Text("Check Answers"),
                     onPressed: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (_) => CheckAnswersPage(
-                                questions: questions,
-                                answers: answers,
-                              )));
+                      // Navigator.of(context).push(MaterialPageRoute(
+                      //     builder: (_) => CheckAnswersPage(
+                      //           questions: questions,
+                      //           answers: answers,
+                      //         )));
                     },
                   ),
                 ],
