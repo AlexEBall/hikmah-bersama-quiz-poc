@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
+import 'package:hikmah_bersama_quiz_poc/screens/home.dart';
 import 'package:html_unescape/html_unescape.dart';
 
 import '../models/question.dart';
+import './home.dart';
 import './finished.dart';
 
 class QuizScreen extends StatefulWidget {
@@ -70,7 +72,7 @@ class _QuizScreenState extends State<QuizScreen> {
               FlatButton(
                 child: Text("Yes"),
                 onPressed: () {
-                  Navigator.pop(context, true);
+                  Navigator.pushNamed(context, HomeScreen.id);
                 },
               ),
               FlatButton(
@@ -90,7 +92,7 @@ class _QuizScreenState extends State<QuizScreen> {
       child: Scaffold(
         key: _key,
         appBar: AppBar(
-          title: Text('Hey'),
+          title: Text('Philantropy Questions'),
           elevation: 0,
         ),
         body: Stack(
