@@ -16,7 +16,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  static const String APP_ID = '';
+  static const String APP_ID = 'ca-app-pub-7387885593040308~2350391048';
   bool processing;
 
   static final MobileAdTargetingInfo targetingInfo = MobileAdTargetingInfo(
@@ -30,13 +30,13 @@ class _HomeScreenState extends State<HomeScreen> {
   BannerAd buildBanner() {
     return BannerAd(
       adUnitId: BannerAd.testAdUnitId,
-      size: AdSize.banner,
+      size: AdSize.smartBanner,
       listener: (MobileAdEvent event) {
-        if (event == MobileAdEvent.loaded) {
-          bannerAd.show();
-        } else if (event == MobileAdEvent.closed) {
-          interstitialAd = buildInterstitial()..load();
-        }
+        // if (event == MobileAdEvent.loaded) {
+        //   bannerAd..show();
+        // } else if (event == MobileAdEvent.closed) {
+        //   interstitialAd = buildInterstitial()..load();
+        // }
         print(event);
       },
     );
@@ -62,17 +62,18 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
     processing = false;
 
-    // FirebaseAdMob.instance.initialize(appId: FirebaseAdMob.testAppId);
-    // bannerAd = buildBanner()..load();
+    FirebaseAdMob.instance
+        .initialize(appId: 'ca-app-pub-7387885593040308~2350391048');
+    bannerAd = buildBanner()..load();
     // interstitialAd = buildInterstitial()..load();
   }
 
-  // @override
-  // void dispose() {
-  //   super.dispose();
-  //   bannerAd?.dispose();
-  //   interstitialAd?.dispose();
-  // }
+  @override
+  void dispose() {
+    bannerAd?.dispose();
+    // interstitialAd?.dispose();
+    super.dispose();
+  }
 
   void _startQuiz() async {
     setState(() {
@@ -104,20 +105,24 @@ class _HomeScreenState extends State<HomeScreen> {
       );
     } on SocketException catch (_) {
       Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-              builder: (_) => ErrorPage(
-                    message:
-                        "Can't reach the servers, \n Please check your internet connection.",
-                  )));
+        context,
+        MaterialPageRoute(
+          builder: (_) => ErrorPage(
+            message:
+                "Can't reach the servers, \n Please check your internet connection.",
+          ),
+        ),
+      );
     } catch (e) {
       print(e.message);
       Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-              builder: (_) => ErrorPage(
-                    message: "Unexpected error trying to connect to the API",
-                  )));
+        context,
+        MaterialPageRoute(
+          builder: (_) => ErrorPage(
+            message: "Unexpected error trying to connect to the API",
+          ),
+        ),
+      );
     }
     setState(() {
       processing = false;
@@ -126,9 +131,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // bannerAd
-    //   ..load()
-    //   ..show();
+    print('hello');
+    bannerAd
+      ..load()
+      ..show();
     return Scaffold(
       appBar: AppBar(
         title: Text('Mindful Philanthopy'),

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "605105720812",
+    "firebase_url": "https://hikmah-bersama-quiz-poc.firebaseio.com",
+    "project_id": "hikmah-bersama-quiz-poc",
+    "storage_bucket": "hikmah-bersama-quiz-poc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:605105720812:android:c92934936731fdcf0b44c9",
+        "android_client_info": {
+          "package_name": "com.example.hikmah_bersama_quiz_poc"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "605105720812-jpnrh05mf1d0cg3nf5gs1jo3f0thgknc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDRaQU6zebMI7GVuypRKGtLcXC2CIzNVMc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "605105720812-jpnrh05mf1d0cg3nf5gs1jo3f0thgknc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
