@@ -9,8 +9,6 @@ class QuizFinishedPage extends StatelessWidget {
   final List<Question> questions;
   final Map<int, dynamic> answers;
 
-  // final int correctAnswers;
-
   QuizFinishedPage({@required this.questions, @required this.answers});
 
   @override
@@ -19,6 +17,10 @@ class QuizFinishedPage extends StatelessWidget {
     this.answers.forEach((index, value) {
       if (this.questions[index].correctAnswer == value) correct++;
     });
+
+    // TODO: This is where it gets saved to the db
+    // print(correct);
+
     final TextStyle titleStyle = TextStyle(
         color: Colors.black87, fontSize: 16.0, fontWeight: FontWeight.w500);
     final TextStyle trailingStyle = TextStyle(

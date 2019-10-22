@@ -28,7 +28,7 @@ class _QuizScreenState extends State<QuizScreen> {
   @override
   void initState() {
     super.initState();
-    print(widget.questions[0].question);
+    // print(widget.questions[0].question);
   }
 
   @override
@@ -98,7 +98,7 @@ class _QuizScreenState extends State<QuizScreen> {
         body: Stack(
           children: <Widget>[
             ClipPath(
-              clipper: WaveClipperTwo(),
+              clipper: WaveClipperOne(),
               child: Container(
                 decoration:
                     BoxDecoration(color: Theme.of(context).primaryColor),
