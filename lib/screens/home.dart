@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
-// import 'package:firebase_admob/firebase_admob.dart';
+import 'package:firebase_admob/firebase_admob.dart';
 
 import './error.dart';
 import './quiz.dart';
@@ -16,46 +16,46 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  // static const String APP_ID = '';
+  static const String APP_ID = '';
   bool processing;
 
-  // static final MobileAdTargetingInfo targetingInfo = MobileAdTargetingInfo(
-  //   testDevices: APP_ID != null ? [APP_ID] : null,
-  //   keywords: ['Meditation', 'Philantrophy', 'Breathing', 'Yoga'],
-  // );
+  static final MobileAdTargetingInfo targetingInfo = MobileAdTargetingInfo(
+    testDevices: APP_ID != null ? [APP_ID] : null,
+    keywords: ['Meditation', 'Philantrophy', 'Breathing', 'Yoga'],
+  );
 
-  // BannerAd bannerAd;
-  // InterstitialAd interstitialAd;
+  BannerAd bannerAd;
+  InterstitialAd interstitialAd;
 
-  // BannerAd buildBanner() {
-  //   return BannerAd(
-  //     adUnitId: BannerAd.testAdUnitId,
-  //     size: AdSize.banner,
-  //     listener: (MobileAdEvent event) {
-  // if (event == MobileAdEvent.loaded) {
-  //   bannerAd.show();
-  // } else if (event == MobileAdEvent.closed) {
-  //     interstitialAd = buildInterstitial()..load();
-  //   }
-  //       print(event);
-  //     },
-  //   );
-  // }
+  BannerAd buildBanner() {
+    return BannerAd(
+      adUnitId: BannerAd.testAdUnitId,
+      size: AdSize.banner,
+      listener: (MobileAdEvent event) {
+        if (event == MobileAdEvent.loaded) {
+          bannerAd.show();
+        } else if (event == MobileAdEvent.closed) {
+          interstitialAd = buildInterstitial()..load();
+        }
+        print(event);
+      },
+    );
+  }
 
-  // InterstitialAd buildInterstitial() {
-  //   return InterstitialAd(
-  //     adUnitId: InterstitialAd.testAdUnitId,
-  //     targetingInfo: targetingInfo,
-  //     listener: (MobileAdEvent event) {
-  //       if (event == MobileAdEvent.failedToLoad) {
-  //         interstitialAd..load();
-  //       } else if (event == MobileAdEvent.closed) {
-  //         interstitialAd = buildInterstitial()..load();
-  //       }
-  //       print(event);
-  //     },
-  //   );
-  // }
+  InterstitialAd buildInterstitial() {
+    return InterstitialAd(
+      adUnitId: InterstitialAd.testAdUnitId,
+      targetingInfo: targetingInfo,
+      listener: (MobileAdEvent event) {
+        if (event == MobileAdEvent.failedToLoad) {
+          interstitialAd..load();
+        } else if (event == MobileAdEvent.closed) {
+          interstitialAd = buildInterstitial()..load();
+        }
+        print(event);
+      },
+    );
+  }
 
   @override
   void initState() {

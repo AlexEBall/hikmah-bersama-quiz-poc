@@ -40,7 +40,7 @@ class _QuizScreenState extends State<QuizScreen> {
       options.shuffle();
     }
 
-    print(options);
+    // print(options);
 
     void _nextSubmit() {
       if (_answers[_currentIndex] == null) {
