@@ -16,7 +16,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  static const String APP_ID = 'ca-app-pub-7387885593040308~2350391048';
+  static const String APP_ID = '';
   bool processing;
 
   static final MobileAdTargetingInfo targetingInfo = MobileAdTargetingInfo(
@@ -62,8 +62,7 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
     processing = false;
 
-    FirebaseAdMob.instance
-        .initialize(appId: 'ca-app-pub-7387885593040308~2350391048');
+    FirebaseAdMob.instance.initialize(appId: '');
     bannerAd = buildBanner()..load();
     // interstitialAd = buildInterstitial()..load();
   }
