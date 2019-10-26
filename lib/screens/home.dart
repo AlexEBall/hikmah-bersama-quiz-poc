@@ -20,9 +20,8 @@ class _HomeScreenState extends State<HomeScreen> {
   bool processing;
 
   static final MobileAdTargetingInfo targetingInfo = MobileAdTargetingInfo(
-    testDevices: DotEnv().env['ADD_MOD_ID'] != null
-        ? [DotEnv().env['ADD_MOD_ID']]
-        : null,
+    testDevices:
+        DotEnv().env['AD_MOD_ID'] != null ? [DotEnv().env['AD_MOD_ID']] : null,
     keywords: ['Meditation', 'Philantrophy', 'Breathing', 'Yoga'],
   );
 
@@ -64,7 +63,7 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
     processing = false;
 
-    FirebaseAdMob.instance.initialize(appId: DotEnv().env['ADD_MOD_ID']);
+    FirebaseAdMob.instance.initialize(appId: DotEnv().env['AD_MOD_ID']);
     bannerAd = buildBanner()..load();
     // interstitialAd = buildInterstitial()..load();
   }
