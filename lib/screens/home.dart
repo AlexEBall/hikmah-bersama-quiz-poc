@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:firebase_admob/firebase_admob.dart';
 
 import './error.dart';
@@ -16,11 +17,12 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  static const String APP_ID = '';
   bool processing;
 
   static final MobileAdTargetingInfo targetingInfo = MobileAdTargetingInfo(
-    testDevices: APP_ID != null ? [APP_ID] : null,
+    testDevices: DotEnv().env['ADD_MOD_ID'] != null
+        ? [DotEnv().env['ADD_MOD_ID']]
+        : null,
     keywords: ['Meditation', 'Philantrophy', 'Breathing', 'Yoga'],
   );
 
@@ -62,7 +64,7 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
     processing = false;
 
-    FirebaseAdMob.instance.initialize(appId: '');
+    FirebaseAdMob.instance.initialize(appId: DotEnv().env['ADD_MOD_ID']);
     bannerAd = buildBanner()..load();
     // interstitialAd = buildInterstitial()..load();
   }
@@ -130,7 +132,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print('hello');
     bannerAd
       ..load()
       ..show();

@@ -149,7 +149,7 @@ class _QuizScreenState extends State<QuizScreen> {
                   Expanded(
                     child: Container(
                       alignment: Alignment.bottomCenter,
-                      margin: EdgeInsets.only(bottom: 40.0),
+                      margin: EdgeInsets.only(bottom: 90.0),
                       child: RaisedButton(
                         child: Text(
                             _currentIndex == (widget.questions.length - 1)
