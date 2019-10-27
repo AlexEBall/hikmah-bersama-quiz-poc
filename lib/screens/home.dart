@@ -30,8 +30,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
   BannerAd buildBanner() {
     return BannerAd(
-      adUnitId: BannerAd.testAdUnitId,
+      adUnitId: DotEnv().env['AD_MOB_ID'],
       size: AdSize.smartBanner,
+      targetingInfo: targetingInfo,
       listener: (MobileAdEvent event) {
         // if (event == MobileAdEvent.loaded) {
         //   bannerAd..show();
@@ -133,7 +134,9 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     bannerAd
       ..load()
-      ..show();
+      ..show(
+        anchorType: AnchorType.bottom,
+      );
     return Scaffold(
       appBar: AppBar(
         title: Text('Mindful Philanthopy'),
