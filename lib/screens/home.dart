@@ -1,8 +1,8 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:firebase_admob/firebase_admob.dart';
+// import 'package:flutter_dotenv/flutter_dotenv.dart';
+// import 'package:admob_flutter/admob_flutter.dart';
 
 import './error.dart';
 import './quiz.dart';
@@ -19,59 +19,68 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   bool processing;
 
-  static final MobileAdTargetingInfo targetingInfo = MobileAdTargetingInfo(
-    testDevices:
-        DotEnv().env['AD_MOD_ID'] != null ? [DotEnv().env['AD_MOD_ID']] : null,
-    keywords: ['Meditation', 'Philantrophy', 'Breathing', 'Yoga'],
-  );
+  // String getBannerAdUnitId() {
+  //   if (Platform.isIOS) {
+  //     return DotEnv().env['AD_MOD_ID_IOS'];
+  //   } else if (Platform.isAndroid) {
+  //     return DotEnv().env['AD_MOD_ID'];
+  //   }
+  //   return null;
+  // }
 
-  BannerAd bannerAd;
-  InterstitialAd interstitialAd;
+  // static final MobileAdTargetingInfo targetingInfo = MobileAdTargetingInfo(
+  //   testDevices:
+  //       DotEnv().env['AD_MOD_ID'] != null ? [DotEnv().env['AD_MOD_ID']] : null,
+  //   keywords: ['Meditation', 'Philantrophy', 'Breathing', 'Yoga'],
+  // );
 
-  BannerAd buildBanner() {
-    return BannerAd(
-      adUnitId: DotEnv().env['AD_MOB_ID'],
-      size: AdSize.smartBanner,
-      targetingInfo: targetingInfo,
-      listener: (MobileAdEvent event) {
-        // if (event == MobileAdEvent.loaded) {
-        //   bannerAd..show();
-        // } else if (event == MobileAdEvent.closed) {
-        //   interstitialAd = buildInterstitial()..load();
-        // }
-        print(event);
-      },
-    );
-  }
+  // BannerAd bannerAd;
+  // InterstitialAd interstitialAd;
 
-  InterstitialAd buildInterstitial() {
-    return InterstitialAd(
-      adUnitId: InterstitialAd.testAdUnitId,
-      targetingInfo: targetingInfo,
-      listener: (MobileAdEvent event) {
-        if (event == MobileAdEvent.failedToLoad) {
-          interstitialAd..load();
-        } else if (event == MobileAdEvent.closed) {
-          interstitialAd = buildInterstitial()..load();
-        }
-        print(event);
-      },
-    );
-  }
+  // BannerAd buildBanner() {
+  //   return BannerAd(
+  //     adUnitId: BannerAd.testAdUnitId,
+  //     size: AdSize.smartBanner,
+  //     targetingInfo: targetingInfo,
+  //     listener: (MobileAdEvent event) {
+  //       // if (event == MobileAdEvent.loaded) {
+  //       //   bannerAd..show();
+  //       // } else if (event == MobileAdEvent.closed) {
+  //       //   interstitialAd = buildInterstitial()..load();
+  //       // }
+  //       print(event);
+  //     },
+  //   );
+  // }
+
+  // InterstitialAd buildInterstitial() {
+  //   return InterstitialAd(
+  //     adUnitId: InterstitialAd.testAdUnitId,
+  //     targetingInfo: targetingInfo,
+  //     listener: (MobileAdEvent event) {
+  //       if (event == MobileAdEvent.failedToLoad) {
+  //         interstitialAd..load();
+  //       } else if (event == MobileAdEvent.closed) {
+  //         interstitialAd = buildInterstitial()..load();
+  //       }
+  //       print(event);
+  //     },
+  //   );
+  // }
 
   @override
   void initState() {
     super.initState();
     processing = false;
 
-    FirebaseAdMob.instance.initialize(appId: DotEnv().env['AD_MOD_ID']);
-    bannerAd = buildBanner()..load();
+    // FirebaseAdMob.instance.initialize(appId: DotEnv().env['AD_MOD_ID']);
+    // bannerAd = buildBanner()..load();
     // interstitialAd = buildInterstitial()..load();
   }
 
   @override
   void dispose() {
-    bannerAd?.dispose();
+    // bannerAd?.dispose();
     // interstitialAd?.dispose();
     super.dispose();
   }
@@ -132,11 +141,11 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    bannerAd
-      ..load()
-      ..show(
-        anchorType: AnchorType.bottom,
-      );
+    // bannerAd
+    //   ..load()
+    //   ..show(
+    //     anchorType: AnchorType.bottom,
+    //   );
     return Scaffold(
       appBar: AppBar(
         title: Text('Mindful Philanthopy'),

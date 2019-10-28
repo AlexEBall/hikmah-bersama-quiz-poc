@@ -44,8 +44,13 @@ android {
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        resValue "string", "AD_MOB_ID", apikeyProperties['ADD_MOD_ID']
-        // manifestPlaceholders = [ AD_MOB_ID: apikeyProperties['ADD_MOD_ID'] ]
+        resValue "string", "AD_MOB_ID", apikeyProperties['AD_MOD_ID']
+        // manifestPlaceholders = [ AD_MOB_ID: apikeyProperties['AD_MOD_ID'] ]
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 
     buildTypes {

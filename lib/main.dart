@@ -1,10 +1,23 @@
+// import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+// import 'package:admob_flutter/admob_flutter.dart';
 
 import './screens/home.dart';
 
+// String getAppId() {
+//   if (Platform.isIOS) {
+//     return DotEnv().env['AD_MOD_ID_IOS'];
+//   } else {
+//     return DotEnv().env['AD_MOD_ID'];
+//   }
+// }
+
 Future main() async {
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   await DotEnv().load('.env');
+  // Admob.initialize(getAppId());
   runApp(MyApp());
 }
 

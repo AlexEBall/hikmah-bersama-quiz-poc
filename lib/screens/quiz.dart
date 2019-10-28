@@ -1,7 +1,10 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
-import 'package:hikmah_bersama_quiz_poc/screens/home.dart';
 import 'package:html_unescape/html_unescape.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+// import 'package:admob_flutter/admob_flutter.dart';
+import 'package:firebase_admob/firebase_admob.dart';
 
 import '../models/question.dart';
 import './home.dart';
@@ -25,22 +28,71 @@ class _QuizScreenState extends State<QuizScreen> {
   final Map<int, dynamic> _answers = {};
   final GlobalKey<ScaffoldState> _key = GlobalKey<ScaffoldState>();
 
+  // String getAppId() {
+  //   if (Platform.isIOS) {
+  //     return DotEnv().env['AD_MOD_ID_IOS'];
+  //   } else {
+  //     return DotEnv().env['AD_MOD_ID'];
+  //   }
+  // }
+
+  static final MobileAdTargetingInfo targetingInfo = MobileAdTargetingInfo(
+    testDevices: DotEnv().env['TEST_AD_UNIT'] != null
+        ? [DotEnv().env['TEST_AD_UNIT']]
+        : null,
+    keywords: ['Meditation', 'Philantrophy', 'Breathing', 'Yoga'],
+  );
+
+  BannerAd bannerAd;
+  // InterstitialAd interstitialAd;
+
+  BannerAd buildBanner() {
+    return BannerAd(
+      adUnitId: BannerAd.testAdUnitId,
+      size: AdSize.smartBanner,
+      targetingInfo: targetingInfo,
+      listener: (MobileAdEvent event) {
+        // if (event == MobileAdEvent.loaded) {
+        //   bannerAd..show();
+        // } else if (event == MobileAdEvent.closed) {
+        //   interstitialAd = buildInterstitial()..load();
+        // }
+        print(event);
+      },
+    );
+  }
+
   @override
   void initState() {
     super.initState();
     // print(widget.questions[0].question);
+    FirebaseAdMob.instance.initialize(appId: DotEnv().env['AD_MOD_ID']);
+    bannerAd = buildBanner()..load();
+  }
+
+  @override
+  void dispose() {
+    bannerAd?.dispose();
+    // interstitialAd?.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    bannerAd
+      ..load()
+      ..show(
+        anchorType: AnchorType.bottom,
+      );
+
     Question question = widget.questions[_currentIndex];
+
     final List<dynamic> options = question.incorrectAnswers;
+
     if (!options.contains(question.correctAnswer)) {
       options.add(question.correctAnswer);
       options.shuffle();
     }
-
-    // print(options);
 
     void _nextSubmit() {
       if (_answers[_currentIndex] == null) {
@@ -49,17 +101,22 @@ class _QuizScreenState extends State<QuizScreen> {
         ));
         return;
       }
+
       if (_currentIndex < (widget.questions.length - 1)) {
         setState(() {
           _currentIndex++;
         });
       } else {
-        Navigator.of(context).pushReplacement(MaterialPageRoute(
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
             builder: (_) => QuizFinishedPage(
-                questions: widget.questions, answers: _answers)));
+                questions: widget.questions, answers: _answers),
+          ),
+        );
       }
     }
 
+    // Quit quiz logic
     Future<bool> _onWillPop() async {
       return showDialog<bool>(
         context: context,
@@ -158,7 +215,7 @@ class _QuizScreenState extends State<QuizScreen> {
                         onPressed: _nextSubmit,
                       ),
                     ),
-                  )
+                  ),
                 ],
               ),
             )
