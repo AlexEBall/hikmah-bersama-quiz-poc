@@ -1,4 +1,3 @@
-// import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -8,7 +7,6 @@ import './screens/home.dart';
 Future main() async {
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   await DotEnv().load('.env');
-  // Admob.initialize(getAppId());
   runApp(MyApp());
 }
 

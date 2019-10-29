@@ -1,12 +1,11 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 import 'package:html_unescape/html_unescape.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-// import 'package:admob_flutter/admob_flutter.dart';
 import 'package:firebase_admob/firebase_admob.dart';
 
 import '../models/question.dart';
+import '../constants/constants.dart';
 import './home.dart';
 import './finished.dart';
 
@@ -21,9 +20,6 @@ class QuizScreen extends StatefulWidget {
 }
 
 class _QuizScreenState extends State<QuizScreen> {
-  final TextStyle _questionStyle = TextStyle(
-      fontSize: 18.0, fontWeight: FontWeight.w500, color: Colors.white);
-
   int _currentIndex = 0;
   final Map<int, dynamic> _answers = {};
   final GlobalKey<ScaffoldState> _key = GlobalKey<ScaffoldState>();
@@ -73,7 +69,6 @@ class _QuizScreenState extends State<QuizScreen> {
   @override
   void dispose() {
     bannerAd?.dispose();
-    // interstitialAd?.dispose();
     super.dispose();
   }
 
@@ -174,12 +169,8 @@ class _QuizScreenState extends State<QuizScreen> {
                       ),
                       SizedBox(width: 16.0),
                       Expanded(
-                        child: Text(
-                          HtmlUnescape().convert(
-                              widget.questions[_currentIndex].question),
-                          softWrap: true,
-                          style: _questionStyle,
-                        ),
+                        child: Text(widget.questions[_currentIndex].question,
+                            style: kQuestionStyle),
                       ),
                     ],
                   ),
