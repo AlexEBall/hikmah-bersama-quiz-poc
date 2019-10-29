@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 import 'package:html_unescape/html_unescape.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -20,6 +21,7 @@ class QuizScreen extends StatefulWidget {
 }
 
 class _QuizScreenState extends State<QuizScreen> {
+  Color color = Colors.amberAccent;
   int _currentIndex = 0;
   final Map<int, dynamic> _answers = {};
   final GlobalKey<ScaffoldState> _key = GlobalKey<ScaffoldState>();
@@ -68,8 +70,8 @@ class _QuizScreenState extends State<QuizScreen> {
 
   @override
   void dispose() {
-    bannerAd?.dispose();
     super.dispose();
+    bannerAd..dispose();
   }
 
   @override
@@ -84,6 +86,7 @@ class _QuizScreenState extends State<QuizScreen> {
 
     final List<dynamic> options = question.incorrectAnswers;
 
+    // TODO: Isn't this unnecessary?
     if (!options.contains(question.correctAnswer)) {
       options.add(question.correctAnswer);
       options.shuffle();
@@ -91,6 +94,7 @@ class _QuizScreenState extends State<QuizScreen> {
 
     void _nextSubmit() {
       if (_answers[_currentIndex] == null) {
+        // TODO: Refactor this
         _key.currentState.showSnackBar(SnackBar(
           content: Text("You must select an answer to continue."),
         ));
@@ -180,15 +184,38 @@ class _QuizScreenState extends State<QuizScreen> {
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
                         ...options.map(
-                          (option) => RadioListTile(
-                            title: Text(HtmlUnescape().convert("$option")),
-                            groupValue: _answers[_currentIndex],
-                            value: option,
-                            onChanged: (value) {
-                              setState(() {
-                                _answers[_currentIndex] = option;
-                              });
-                            },
+                          (option) => Container(
+                            decoration: BoxDecoration(
+                              color: color,
+                              border: Border.all(width: 1.5),
+                            ),
+                            child: RadioListTile(
+                              title: Text(option),
+                              groupValue: _answers[_currentIndex],
+                              value: option,
+                              onChanged: (value) {
+                                print(question.question);
+                                print(question.correctAnswer);
+                                print(question.incorrectAnswers);
+
+                                setState(() {
+                                  color = kSelectedColor;
+                                });
+
+                                Future.delayed(
+                                    const Duration(milliseconds: 500), () {
+                                  // Here you can write your code
+                                  setState(() {
+                                    // Here you can write your code for open new view
+                                    _answers[_currentIndex] = option;
+                                  });
+                                });
+
+                                // setState(() {
+                                //   _answers[_currentIndex] = option;
+                                // });
+                              },
+                            ),
                           ),
                         ),
                       ],
@@ -197,6 +224,7 @@ class _QuizScreenState extends State<QuizScreen> {
                   Expanded(
                     child: Container(
                       alignment: Alignment.bottomCenter,
+                      // TODO: Adjust for android and ios
                       margin: EdgeInsets.only(bottom: 90.0),
                       child: RaisedButton(
                         child: Text(
