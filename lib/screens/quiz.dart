@@ -183,42 +183,56 @@ class _QuizScreenState extends State<QuizScreen> {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
-                        ...options.map(
-                          (option) => Container(
+                        ListView.builder(
+                          itemCount: options.length,
+                          itemBuilder: (_, idx) => Container(
                             decoration: BoxDecoration(
                               color: color,
-                              border: Border.all(width: 1.5),
+                              border: Border.all(width: 1.0),
                             ),
-                            child: RadioListTile(
-                              title: Text(option),
-                              groupValue: _answers[_currentIndex],
-                              value: option,
-                              onChanged: (value) {
-                                print(question.question);
-                                print(question.correctAnswer);
-                                print(question.incorrectAnswers);
-
-                                setState(() {
-                                  color = kSelectedColor;
-                                });
-
-                                Future.delayed(
-                                    const Duration(milliseconds: 500), () {
-                                  // Here you can write your code
-                                  setState(() {
-                                    // Here you can write your code for open new view
-                                    _answers[_currentIndex] = option;
-                                  });
-                                });
-
-                                // setState(() {
-                                //   _answers[_currentIndex] = option;
-                                // });
-                              },
+                            child: ListTile(
+                              title: Text(options[idx]),
                             ),
                           ),
                         ),
                       ],
+                      // <Widget>[
+                      //   ...options.map(
+                      //     (option) => Container(
+                      //       decoration: BoxDecoration(
+                      //         color: color,
+                      //         border: Border.all(width: 1.5),
+                      //       ),
+                      //       child: RadioListTile(
+                      //         title: Text(option),
+                      //         groupValue: _answers[_currentIndex],
+                      //         value: option,
+                      //         onChanged: (value) {
+                      //           print(question.question);
+                      //           print(question.correctAnswer);
+                      //           print(question.incorrectAnswers);
+
+                      //           setState(() {
+                      //             color = kSelectedColor;
+                      //           });
+
+                      //           Future.delayed(
+                      //               const Duration(milliseconds: 500), () {
+                      //             // Here you can write your code
+                      //             setState(() {
+                      //               // Here you can write your code for open new view
+                      //               _answers[_currentIndex] = option;
+                      //             });
+                      //           });
+
+                      //           // setState(() {
+                      //           //   _answers[_currentIndex] = option;
+                      //           // });
+                      //         },
+                      //       ),
+                      //     ),
+                      //   ),
+                      // ],
                     ),
                   ),
                   Expanded(
