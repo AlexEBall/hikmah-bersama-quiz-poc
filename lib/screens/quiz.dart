@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
@@ -21,7 +22,6 @@ class QuizScreen extends StatefulWidget {
 }
 
 class _QuizScreenState extends State<QuizScreen> {
-  Color color = Colors.amberAccent;
   int _currentIndex = 0;
   final Map<int, dynamic> _answers = {};
   final GlobalKey<ScaffoldState> _key = GlobalKey<ScaffoldState>();
@@ -81,6 +81,26 @@ class _QuizScreenState extends State<QuizScreen> {
     Colors.white
   ];
 
+  void _nextSubmit(List<Color> colors) {
+    new Timer(new Duration(seconds: 1), () {
+      if (_currentIndex < (widget.questions.length - 1)) {
+        setState(() {
+          colors.setAll(
+              0, [Colors.white, Colors.white, Colors.white, Colors.white]);
+
+          _currentIndex++;
+        });
+      } else {
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (_) => QuizFinishedPage(
+                questions: widget.questions, answers: _answers),
+          ),
+        );
+      }
+    });
+  }
+
   // TODO: not functional, should be in a class
   void _changeSelectedColor(List<Color> colors, int index) {
     if (colors.contains(Colors.green)) {
@@ -97,6 +117,19 @@ class _QuizScreenState extends State<QuizScreen> {
     }
   }
 
+  void _informUserOfCorrectChoice(
+      String correct, List<String> choices, List<Color> colors) {
+    final int answer = choices.indexOf(correct);
+
+    new Timer(new Duration(seconds: 1), () {
+      setState(() {
+        colors[answer] = Colors.orangeAccent;
+      });
+
+      _nextSubmit(colors);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     bannerAd
@@ -109,34 +142,9 @@ class _QuizScreenState extends State<QuizScreen> {
 
     final List<dynamic> options = question.incorrectAnswers;
 
-    // TODO: Isn't this unnecessary?
     if (!options.contains(question.correctAnswer)) {
       options.add(question.correctAnswer);
-      // TODO: Create a function that
       options.shuffle();
-    }
-
-    void _nextSubmit() {
-      if (_answers[_currentIndex] == null) {
-        // TODO: Refactor this
-        _key.currentState.showSnackBar(SnackBar(
-          content: Text("You must select an answer to continue."),
-        ));
-        return;
-      }
-
-      if (_currentIndex < (widget.questions.length - 1)) {
-        setState(() {
-          _currentIndex++;
-        });
-      } else {
-        Navigator.of(context).pushReplacement(
-          MaterialPageRoute(
-            builder: (_) => QuizFinishedPage(
-                questions: widget.questions, answers: _answers),
-          ),
-        );
-      }
     }
 
     // Quit quiz logic
@@ -216,8 +224,8 @@ class _QuizScreenState extends State<QuizScreen> {
                           title: Text(options[idx]),
                           onTap: () {
                             _changeSelectedColor(optionsColor, idx);
-                            // TODO: create a timer that before proceeding
-                            // shows the correct answer in another color (than white or green)
+                            _informUserOfCorrectChoice(
+                                question.correctAnswer, options, optionsColor);
                           },
                         ),
                       );
@@ -262,20 +270,22 @@ class _QuizScreenState extends State<QuizScreen> {
                   //   ),
                   // ],
                   // ),
-                  Expanded(
-                    child: Container(
-                      alignment: Alignment.bottomCenter,
-                      // TODO: Adjust for android and ios
-                      margin: EdgeInsets.only(bottom: 90.0),
-                      child: RaisedButton(
-                        child: Text(
-                            _currentIndex == (widget.questions.length - 1)
-                                ? "Submit"
-                                : "Next"),
-                        onPressed: _nextSubmit,
-                      ),
-                    ),
-                  ),
+                  // Expanded(
+                  //   child: Container(
+                  //     alignment: Alignment.bottomCenter,
+                  //     // TODO: Adjust for android and ios
+                  //     margin: EdgeInsets.only(bottom: 90.0),
+                  //     child: RaisedButton(
+                  //       child: Text(
+                  //           _currentIndex == (widget.questions.length - 1)
+                  //               ? "Submit"
+                  //               : "Next"),
+                  //       onPressed: () {
+                  //         print('notuhing');
+                  //       },
+                  //     ),
+                  //   ),
+                  // ),
                 ],
               ),
             )
