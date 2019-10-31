@@ -23,7 +23,6 @@ class QuizScreen extends StatefulWidget {
 class _QuizScreenState extends State<QuizScreen> {
   Color color = Colors.amberAccent;
   int _currentIndex = 0;
-  bool selected = false;
   final Map<int, dynamic> _answers = {};
   final GlobalKey<ScaffoldState> _key = GlobalKey<ScaffoldState>();
 
@@ -75,6 +74,29 @@ class _QuizScreenState extends State<QuizScreen> {
     bannerAd..dispose();
   }
 
+  List<Color> optionsColor = [
+    Colors.white,
+    Colors.white,
+    Colors.white,
+    Colors.white
+  ];
+
+  // TODO: not functional, should be in a class
+  void _changeSelectedColor(List<Color> colors, int index) {
+    if (colors.contains(Colors.green)) {
+      final int selected = colors.indexOf(Colors.green);
+      colors.removeAt(selected);
+      colors.add(Colors.white);
+      setState(() {
+        colors[index] = Colors.green;
+      });
+    } else {
+      setState(() {
+        colors[index] = Colors.green;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     bannerAd
@@ -90,6 +112,7 @@ class _QuizScreenState extends State<QuizScreen> {
     // TODO: Isn't this unnecessary?
     if (!options.contains(question.correctAnswer)) {
       options.add(question.correctAnswer);
+      // TODO: Create a function that
       options.shuffle();
     }
 
@@ -186,19 +209,15 @@ class _QuizScreenState extends State<QuizScreen> {
                     itemBuilder: (context, idx) {
                       return Container(
                         decoration: BoxDecoration(
-                          color: color,
+                          color: optionsColor[idx],
                           border: Border.all(width: 1.0),
                         ),
                         child: ListTile(
                           title: Text(options[idx]),
-                          selected: selected,
                           onTap: () {
-                            // this will print the answers
-                            print(context);
-
-                            setState(() {
-                              selected = !selected;
-                            });
+                            _changeSelectedColor(optionsColor, idx);
+                            // TODO: create a timer that before proceeding
+                            // shows the correct answer in another color (than white or green)
                           },
                         ),
                       );
