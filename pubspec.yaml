@@ -19,6 +19,8 @@ dependencies:
   flutter_dotenv: ^2.0.3
 
 dev_dependencies:
+  # have to use an older version of test
+  test: ^1.6.0
   flutter_test:
     sdk: flutter
 
