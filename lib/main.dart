@@ -1,10 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:redux/redux.dart';
+import 'package:flutter_redux/flutter_redux.dart';
 
+import './redux/reducers.dart';
+
+import './store/app_state.dart';
 import './screens/home.dart';
 
 Future main() async {
+  final _initalState = AppState(processing: false);
+  final Store<AppState> _store =
+      Store<AppState>(reducer, initialState: _initalState);
+
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   await DotEnv().load('.env');
   runApp(MyApp());
