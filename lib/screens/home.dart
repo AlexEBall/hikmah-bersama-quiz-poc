@@ -1,9 +1,11 @@
 import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-import '../redux/actions.dart';
-import '../store/app_state.dart';
+
+import 'package:hikmah_bersama_quiz_poc/redux/processing/processing_actions.dart';
+import 'package:hikmah_bersama_quiz_poc/redux/app/app_state.dart';
 
 import './error.dart';
 import './quiz.dart';
@@ -13,54 +15,54 @@ import '../services/quiz_api_provider.dart';
 class HomeScreen extends StatelessWidget {
   static const String id = 'home_screen';
 
-  void _startQuiz(context) async {
-    print(context);
-    try {
-      List<Question> questions = await getQuestions();
-      Navigator.pop(context);
+  // void _startQuiz(context) async {
+  //   print(context);
+  //   try {
+  //     List<Question> questions = await getQuestions();
+  //     Navigator.pop(context);
 
-      if (questions.length < 1) {
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (_) => ErrorPage(
-              message:
-                  "There are not enough questions in the category, with the options you selected.",
-            ),
-          ),
-        );
-        return;
-      }
+  //     if (questions.length < 1) {
+  //       Navigator.of(context).push(
+  //         MaterialPageRoute(
+  //           builder: (_) => ErrorPage(
+  //             message:
+  //                 "There are not enough questions in the category, with the options you selected.",
+  //           ),
+  //         ),
+  //       );
+  //       return;
+  //     }
 
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (_) => QuizScreen(
-            questions: questions,
-          ),
-        ),
-      );
-    } on SocketException catch (_) {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (_) => ErrorPage(
-            message:
-                "Can't reach the servers, \n Please check your internet connection.",
-          ),
-        ),
-      );
-    } catch (e) {
-      print(e.message);
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (_) => ErrorPage(
-            message: "Unexpected error trying to connect to the API",
-          ),
-        ),
-      );
-    }
-  }
+  //     Navigator.push(
+  //       context,
+  //       MaterialPageRoute(
+  //         builder: (_) => QuizScreen(
+  //           questions: questions,
+  //         ),
+  //       ),
+  //     );
+  //   } on SocketException catch (_) {
+  //     Navigator.pushReplacement(
+  //       context,
+  //       MaterialPageRoute(
+  //         builder: (_) => ErrorPage(
+  //           message:
+  //               "Can't reach the servers, \n Please check your internet connection.",
+  //         ),
+  //       ),
+  //     );
+  //   } catch (e) {
+  //     print(e.message);
+  //     Navigator.pushReplacement(
+  //       context,
+  //       MaterialPageRoute(
+  //         builder: (_) => ErrorPage(
+  //           message: "Unexpected error trying to connect to the API",
+  //         ),
+  //       ),
+  //     );
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -94,10 +96,10 @@ class HomeScreen extends StatelessWidget {
                   onPressed: () {
                     // TODO: Use processing for a spinner widget
 
-                    // StoreProvider.of<AppState>(context)
-                    //     .dispatch(Processing(true));
+                    StoreProvider.of<AppState>(context)
+                        .dispatch(IsProcessing(true));
                     // print(state.processing);
-                    _startQuiz(context);
+                    // _startQuiz(context);
                   },
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.0),

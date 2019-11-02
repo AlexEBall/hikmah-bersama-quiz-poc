@@ -4,18 +4,18 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:redux/redux.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 
-import './redux/reducers.dart';
-import './store/app_state.dart';
+import 'package:hikmah_bersama_quiz_poc/store/store.dart';
+import 'package:hikmah_bersama_quiz_poc/redux/app/app_state.dart';
 
 import './screens/home.dart';
 
 Future main() async {
-  final Store<AppState> _store =
-      Store<AppState>(appReducer, initialState: AppState.initialState());
-
+  // final Store<AppState> _store =
+  //     Store<AppState>(appReducer, initialState: AppState.initialState());
+  final store = createStore();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   await DotEnv().load('.env');
-  runApp(MyApp(store: _store));
+  runApp(MyApp(store: store));
 }
 
 class MyApp extends StatelessWidget {
