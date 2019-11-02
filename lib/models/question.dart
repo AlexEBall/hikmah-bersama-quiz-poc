@@ -1,17 +1,43 @@
-// import 'package:flutter/foundation.dart';
+enum Type { multiple, boolean }
+enum Difficulty { easy, medium, hard }
 
-// enum Type { multiple, boolean }
+class Question {
+  final String categoryName;
+  final Type type;
+  final Difficulty difficulty;
+  final String question;
+  final String correctAnswer;
+  final List<String> incorrectAnswers;
 
-// enum Difficulty { easy, medium, hard }
+  Question(
+      {this.categoryName,
+      this.type,
+      this.difficulty,
+      this.question,
+      this.correctAnswer,
+      this.incorrectAnswers});
 
-// class Question {
-//   final String categoryName;
-//   final Type type;
-//   final Difficulty difficulty;
-//   final String question;
-//   final String correctAnswer;
-//   final List<dynamic> incorrectAnswers;
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is Question &&
+          runtimeType == other.runtimeType &&
+          categoryName == other.categoryName &&
+          type == other.type &&
+          difficulty == other.difficulty &&
+          question == other.question &&
+          correctAnswer == other.correctAnswer &&
+          incorrectAnswers == other.incorrectAnswers;
 
+  @override
+  int get hashCode =>
+      categoryName.hashCode ^
+      type.hashCode ^
+      difficulty.hashCode ^
+      question.hashCode ^
+      correctAnswer.hashCode ^
+      incorrectAnswers.hashCode;
+}
 //   Question(
 //       {@required this.categoryName,
 //       @required this.type,
