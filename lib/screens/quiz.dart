@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:hikmah_bersama_quiz_poc/redux/app/app_state.dart';
 import 'package:hikmah_bersama_quiz_poc/redux/quiz/quiz_actions.dart';
+import 'package:hikmah_bersama_quiz_poc/redux/processing/processing_actions.dart';
 
 // import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 // import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -14,6 +15,8 @@ import 'package:hikmah_bersama_quiz_poc/redux/quiz/quiz_actions.dart';
 // import './home.dart';
 // import './finished.dart';
 
+// TODO: A view model will help to just pluck the state
+// related to the quiz
 class QuizScreen extends StatelessWidget {
   static const String id = 'quiz_screen';
 
@@ -21,7 +24,10 @@ class QuizScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return StoreConnector<AppState, AppState>(
       distinct: true,
-      onInit: (store) => store.dispatch(GetQuestions()),
+      onInit: (store) {
+        store.dispatch(GetQuestions());
+        store.dispatch(IsProcessing(false));
+      },
       converter: (store) => store.state,
       builder: (context, state) => QuizPage(state),
     );

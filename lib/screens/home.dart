@@ -9,31 +9,12 @@ import 'package:hikmah_bersama_quiz_poc/redux/app/app_state.dart';
 import './error.dart';
 import './quiz.dart';
 
-// import '../models/question.dart';
-// import '../services/quiz_api_provider.dart';
-
 class HomeScreen extends StatelessWidget {
   static const String id = 'home_screen';
 
   void _startQuiz(context) {
     try {
-      StoreProvider.of<AppState>(context).dispatch(IsProcessing(false));
-      // List<Question> questions = await getQuestions();
-      // List questions = [];
       Navigator.pop(context);
-
-      // if (questions.length < 1) {
-      //   Navigator.of(context).push(
-      //     MaterialPageRoute(
-      //       builder: (_) => ErrorPage(
-      //         message:
-      //             "There are not enough questions in the category, with the options you selected.",
-      //       ),
-      //     ),
-      //   );
-      //   return;
-      // }
-
       Navigator.push(
         context,
         MaterialPageRoute(
@@ -41,6 +22,7 @@ class HomeScreen extends StatelessWidget {
         ),
       );
     } on SocketException catch (_) {
+      StoreProvider.of<AppState>(context).dispatch(IsProcessing(false));
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
@@ -52,6 +34,7 @@ class HomeScreen extends StatelessWidget {
       );
     } catch (e) {
       print(e.message);
+      StoreProvider.of<AppState>(context).dispatch(IsProcessing(false));
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
@@ -94,10 +77,8 @@ class HomeScreen extends StatelessWidget {
                   highlightElevation: 1.0,
                   onPressed: () {
                     // TODO: Use processing for a spinner widget
-
                     StoreProvider.of<AppState>(context)
                         .dispatch(IsProcessing(true));
-                    // print(state.processing);
                     _startQuiz(context);
                   },
                   shape: RoundedRectangleBorder(
