@@ -92,10 +92,12 @@ class HomeScreen extends StatelessWidget {
                   elevation: 1.0,
                   highlightElevation: 1.0,
                   onPressed: () {
-                    StoreProvider.of<AppState>(context)
-                        .dispatch(Processing(true));
+                    // TODO: Use processing for a spinner widget
+
+                    // StoreProvider.of<AppState>(context)
+                    //     .dispatch(Processing(true));
                     // print(state.processing);
-                    // _startQuiz(context);
+                    _startQuiz(context);
                   },
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.0),

@@ -126,12 +126,6 @@ class _QuizScreenState extends State<QuizScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // bannerAd
-    //   ..load()
-    //   ..show(
-    //     anchorType: AnchorType.bottom,
-    //   );
-
     Question question = widget.questions[_currentIndex];
 
     final List<dynamic> options = question.incorrectAnswers;
