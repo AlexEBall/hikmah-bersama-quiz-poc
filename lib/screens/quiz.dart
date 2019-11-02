@@ -1,14 +1,13 @@
 // import 'dart:async';
 import 'package:flutter/material.dart';
-
 import 'package:flutter_redux/flutter_redux.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:firebase_admob/firebase_admob.dart';
+import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
+
 import 'package:hikmah_bersama_quiz_poc/redux/app/app_state.dart';
 import 'package:hikmah_bersama_quiz_poc/redux/quiz/quiz_actions.dart';
 import 'package:hikmah_bersama_quiz_poc/redux/processing/processing_actions.dart';
-
-// import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
-// import 'package:flutter_dotenv/flutter_dotenv.dart';
-// import 'package:firebase_admob/firebase_admob.dart';
 
 // import '../models/question.dart';
 // import '../constants/constants.dart';
@@ -17,8 +16,50 @@ import 'package:hikmah_bersama_quiz_poc/redux/processing/processing_actions.dart
 
 // TODO: A view model will help to just pluck the state
 // related to the quiz
-class QuizScreen extends StatelessWidget {
+class QuizScreen extends StatefulWidget {
   static const String id = 'quiz_screen';
+
+  @override
+  _QuizScreenState createState() => _QuizScreenState();
+}
+
+class _QuizScreenState extends State<QuizScreen> {
+  // TODO: I feel like this ad mob stuff could be in its
+  // own state that gets initialized on the onInit method
+  @override
+  void initState() {
+    super.initState();
+    FirebaseAdMob.instance.initialize(appId: DotEnv().env['AD_MOD_ID']);
+    bannerAd = buildBanner()..load();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    bannerAd..dispose();
+  }
+
+  static final MobileAdTargetingInfo targetingInfo = MobileAdTargetingInfo(
+    testDevices: DotEnv().env['TEST_AD_UNIT'] != null
+        ? [DotEnv().env['TEST_AD_UNIT']]
+        : null,
+    keywords: ['Meditation', 'Philantrophy', 'Breathing', 'Yoga'],
+  );
+
+  BannerAd bannerAd;
+  BannerAd buildBanner() {
+    return BannerAd(
+      adUnitId: BannerAd.testAdUnitId,
+      size: AdSize.smartBanner,
+      targetingInfo: targetingInfo,
+      listener: (MobileAdEvent event) {
+        if (event == MobileAdEvent.loaded) {
+          bannerAd..show();
+        }
+        print(event);
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,10 +79,105 @@ class QuizPage extends StatelessWidget {
   QuizPage(this.state);
   final AppState state;
 
+  final GlobalKey<ScaffoldState> _key = GlobalKey<ScaffoldState>();
+
+  // Quit quiz logic
+  Future<bool> _onWillPop(context) async {
+    return showDialog<bool>(
+      context: context,
+      builder: (_) {
+        return AlertDialog(
+          content: Text(
+              "Are you sure you want to quit the quiz? All your progress will be lost."),
+          title: Text("Warning!"),
+          actions: <Widget>[
+            FlatButton(
+              child: Text("Yes"),
+              onPressed: () {
+                // Navigator.pushNamed(context, HomeScreen.id);
+              },
+            ),
+            FlatButton(
+              child: Text("No"),
+              onPressed: () {
+                Navigator.pop(context, false);
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     print(state.processing);
-    return Text('Hello');
+    return WillPopScope(
+      onWillPop: () {
+        return _onWillPop(context);
+      },
+      child: Scaffold(
+        key: _key,
+        appBar: AppBar(
+          title: Text('Philantropy Questions'),
+          elevation: 0,
+        ),
+        body: Stack(
+          children: <Widget>[
+            ClipPath(
+              clipper: WaveClipperOne(),
+              child: Container(
+                decoration:
+                    BoxDecoration(color: Theme.of(context).primaryColor),
+                height: 200,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                children: <Widget>[
+                  Row(
+                    children: <Widget>[
+                      CircleAvatar(
+                        backgroundColor: Colors.white70,
+                        // child: Text("${_currentIndex + 1}"),
+                        child: Text('#1'),
+                      ),
+                      SizedBox(width: 16.0),
+                      // Expanded(
+                      //   child: Text(widget.questions[_currentIndex].question,
+                      //       style: kQuestionStyle),
+                      // ),
+                    ],
+                  ),
+                  SizedBox(height: 20.0),
+                  // ListView.builder(
+                  //   shrinkWrap: true,
+                  //   itemCount: options.length,
+                  //   itemBuilder: (context, idx) {
+                  //     return Container(
+                  //       decoration: BoxDecoration(
+                  //         color: optionsColor[idx],
+                  //         border: Border.all(width: 1.0),
+                  //       ),
+                  //       child: ListTile(
+                  //         title: Text(options[idx]),
+                  //         onTap: () {
+                  //           _changeSelectedColor(optionsColor, idx);
+                  //           _informUserOfCorrectChoice(
+                  //               question.correctAnswer, options, optionsColor);
+                  //         },
+                  //       ),
+                  //     );
+                  //   },
+                  // ),
+                ],
+              ),
+            )
+          ],
+        ),
+      ),
+    );
   }
 }
 
