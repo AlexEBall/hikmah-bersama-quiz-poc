@@ -1,14 +1,16 @@
 import '../store/app_state.dart';
 import './actions.dart';
 
-AppState reducer(AppState prevState, dynamic action) {
-  AppState newState = AppState.fromAppState(prevState);
+// AppState appReducer(AppState state, dynamic action) {
+//   AppState newState = AppState.fromAppState(state);
 
-  if (action is Processing) {
-    newState.processing = action.payload;
-  }
+//   if (action is Processing) {
+//     newState.processing = action.payload;
+//   }
 
-  print(newState.processing);
+//   print(newState.processing);
 
-  return newState;
-}
+//   return newState;
+// }
+
+AppState appReducer(AppState state, dynamic action) => new AppState(processing: )
