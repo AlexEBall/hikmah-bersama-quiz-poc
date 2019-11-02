@@ -6,7 +6,7 @@ const kQuestionStyle =
 const kSelectedColor = Color(0xFFB74093);
 const kCorrectColor = Color(0xffaabbcc);
 
-const kQuestions = [
+var kQuestions = [
   {
     'category': 'Islam',
     'type': 'multiple',

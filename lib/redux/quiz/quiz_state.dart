@@ -20,7 +20,7 @@ List createOptions(List questions) {
 class QuizState {
   final int currentIndex;
   final List<Color> colors;
-  final List<String> options;
+  final options;
   final List<Question> questions;
 
   QuizState(

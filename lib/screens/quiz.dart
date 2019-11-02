@@ -1,5 +1,9 @@
 // import 'dart:async';
-// import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
+
+import 'package:flutter_redux/flutter_redux.dart';
+import 'package:hikmah_bersama_quiz_poc/redux/app/app_state.dart';
+import 'package:hikmah_bersama_quiz_poc/redux/quiz/quiz_actions.dart';
 
 // import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 // import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -9,6 +13,31 @@
 // import '../constants/constants.dart';
 // import './home.dart';
 // import './finished.dart';
+
+class QuizScreen extends StatelessWidget {
+  static const String id = 'quiz_screen';
+
+  @override
+  Widget build(BuildContext context) {
+    return StoreConnector<AppState, AppState>(
+      distinct: true,
+      onInit: (store) => store.dispatch(GetQuestions()),
+      converter: (store) => store.state,
+      builder: (context, state) => QuizPage(state),
+    );
+  }
+}
+
+class QuizPage extends StatelessWidget {
+  QuizPage(this.state);
+  final AppState state;
+
+  @override
+  Widget build(BuildContext context) {
+    print(state.processing);
+    return Text('Hello');
+  }
+}
 
 // class QuizScreen extends StatefulWidget {
 //   static const String id = 'quiz_screen';
