@@ -106,17 +106,6 @@ class QuizState {
       'incorrect_answers': ['Giving to the poor', 'Fasting', 'Pilgrimage']
     },
   ];
-  // final List<Question> questions.fromData(staticQuestions);
-  // List createOptions(List questions) {
-  //   return staticQuestions.map((question) {
-  //     String answer = question['correct_answer'];
-  //     List choices = question['incorrect_answers'];
-
-  //     choices.add(answer);
-  //     choices.shuffle();
-  //     return choices;
-  //   }).toList();
-  // }
 
   QuizState({
     @required this.currentIndex,
