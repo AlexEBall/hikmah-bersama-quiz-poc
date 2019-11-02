@@ -16,30 +16,36 @@ Future main() async {
 
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   await DotEnv().load('.env');
-  runApp(MyApp());
+  runApp(MyApp(store: _store));
 }
 
 class MyApp extends StatelessWidget {
+  final Store<AppState> store;
+
+  MyApp({this.store});
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Hikmah / Bersams Quiz POC',
-      theme: ThemeData(
-          primarySwatch: Colors.blue,
-          accentColor: Colors.indigo,
-          fontFamily: "UnicaOne",
-          buttonColor: Colors.pink,
-          buttonTheme: ButtonThemeData(
-              buttonColor: Colors.pink,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20.0),
-              ),
-              textTheme: ButtonTextTheme.primary)),
-      initialRoute: HomeScreen.id,
-      routes: {
-        HomeScreen.id: (context) => HomeScreen(),
-      },
+    return StoreProvider<AppState>(
+      store: store,
+      child: MaterialApp(
+        title: 'Hikmah / Bersams Quiz POC',
+        theme: ThemeData(
+            primarySwatch: Colors.blue,
+            accentColor: Colors.indigo,
+            fontFamily: "UnicaOne",
+            buttonColor: Colors.pink,
+            buttonTheme: ButtonThemeData(
+                buttonColor: Colors.pink,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20.0),
+                ),
+                textTheme: ButtonTextTheme.primary)),
+        initialRoute: HomeScreen.id,
+        routes: {
+          HomeScreen.id: (context) => HomeScreen(),
+        },
+      ),
     );
   }
 }

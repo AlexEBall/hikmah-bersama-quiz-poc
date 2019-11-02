@@ -8,5 +8,7 @@ AppState reducer(AppState prevState, dynamic action) {
     newState.processing = action.payload;
   }
 
+  print(newState.processing);
+
   return newState;
 }
