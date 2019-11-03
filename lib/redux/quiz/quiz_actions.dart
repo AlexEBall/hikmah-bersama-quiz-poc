@@ -3,17 +3,11 @@ import 'package:redux_thunk/redux_thunk.dart';
 
 import 'package:flutter/foundation.dart';
 
-class NextSubmit {}
-
-class ResetColors {}
+import 'package:hikmah_bersama_quiz_poc/redux/app/app_state.dart';
 
 class IncrementCurrentIndex {}
 
-class OneSecondDelay {
-  final String correctAnswer;
-
-  OneSecondDelay({this.correctAnswer});
-}
+class ResetColors {}
 
 class ChangeSelectedColor {
   final int index;
@@ -27,16 +21,30 @@ class InformUserOfCorrectChoice {
   InformUserOfCorrectChoice({@required this.correctAnswer});
 }
 
-ThunkAction oneSecondDelay(String correctAnswer) {
-  return (Store store) async {
+// TODO: Refactore one second delay into function that takes actions
+ThunkAction<AppState> oneSecondDelay(String correctAnswer) {
+  return (Store<AppState> store) async {
     String answer = await Future<String>.delayed(Duration(seconds: 1), () {
-      print('1 second');
       return correctAnswer;
     });
 
-    print('hey');
-    print(answer);
+    return store.dispatch(InformUserOfCorrectChoice(correctAnswer: answer));
+  };
+}
 
-    store.dispatch(InformUserOfCorrectChoice(correctAnswer: answer));
+ThunkAction<AppState> resetQuestionState() {
+  return (Store<AppState> store) async {
+    bool hasASecondPassed =
+        await Future<bool>.delayed(Duration(seconds: 3), () {
+      return true;
+    });
+
+    if (hasASecondPassed) {
+      store.dispatch(ResetColors());
+
+      // Todo: Need a global navigator to provide the conditional for this
+      // and routing purposes
+      store.dispatch(IncrementCurrentIndex());
+    }
   };
 }

@@ -23,8 +23,8 @@ QuizState _changeSelectedColor(QuizState state, ChangeSelectedColor action) {
     colors.removeAt(selected);
     colors.add(Color(0xFFFFFFFF));
 
-    // TODO: Maybe add the ability to change selection
-    // before clicking next?
+    // TODO: Disable other choices
+    // TODO: Add to answers object
 
   } else {
     colors[action.index] = Color(0xff4caf50);
@@ -38,7 +38,6 @@ QuizState _informUserOfCorrectChoice(
   final List<Color> colors = [...state.colors];
   final int answer =
       state.options[state.currentIndex].indexOf(action.correctAnswer);
-
   colors[answer] = Color(0xFFFF9800);
 
   return state.copyWith(colors: colors);

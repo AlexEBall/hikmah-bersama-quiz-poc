@@ -77,8 +77,7 @@ class QuizPage extends StatelessWidget {
 
   void _nextSubmit(context) {
     if (state.quizState.currentIndex < (state.quizState.questions.length - 1)) {
-      StoreProvider.of<AppState>(context).dispatch(IncrementCurrentIndex());
-      // StoreProvider.of<AppState>(context).dispatch(ResetColors());
+      // StoreProvider.of<AppState>(context).dispatch(IncrementCurrentIndex());
     } else {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (_) => QuizFinishedPage()),
@@ -181,6 +180,8 @@ class QuizPage extends StatelessWidget {
                                     .questions[state.quizState.currentIndex]
                                     .correctAnswer));
 
+                            StoreProvider.of<AppState>(context)
+                                .dispatch(resetQuestionState());
                             // _nextSubmit(context);
                           },
                         ),
