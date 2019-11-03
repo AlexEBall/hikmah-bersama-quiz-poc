@@ -15,49 +15,43 @@ import './finished.dart';
 
 // TODO: A view model will help to just pluck the state
 // related to the quiz
-class QuizScreen extends StatefulWidget {
+class QuizScreen extends StatelessWidget {
   static const String id = 'quiz_screen';
-
-  @override
-  _QuizScreenState createState() => _QuizScreenState();
-}
-
-class _QuizScreenState extends State<QuizScreen> {
   // TODO: I feel like this ad mob stuff could be in its
   // own state that gets initialized on the onInit method
-  @override
-  void initState() {
-    super.initState();
-    FirebaseAdMob.instance.initialize(appId: DotEnv().env['AD_MOD_ID']);
-    bannerAd = buildBanner()..load();
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  // FirebaseAdMob.instance.initialize(appId: DotEnv().env['AD_MOD_ID']);
+  // bannerAd = buildBanner()..load();
+  // }
 
-  @override
-  void dispose() {
-    super.dispose();
-    bannerAd..dispose();
-  }
+  // @override
+  // void dispose() {
+  //   super.dispose();
+  // bannerAd..dispose();
+  // }
 
-  static final MobileAdTargetingInfo targetingInfo = MobileAdTargetingInfo(
-    testDevices: DotEnv().env['TEST_AD_UNIT'] != null
-        ? [DotEnv().env['TEST_AD_UNIT']]
-        : null,
-    keywords: ['Meditation', 'Philantrophy', 'Breathing', 'Yoga'],
-  );
+  // static final MobileAdTargetingInfo targetingInfo = MobileAdTargetingInfo(
+  //   testDevices: DotEnv().env['TEST_AD_UNIT'] != null
+  //       ? [DotEnv().env['TEST_AD_UNIT']]
+  //       : null,
+  //   keywords: ['Meditation', 'Philantrophy', 'Breathing', 'Yoga'],
+  // );
 
-  BannerAd bannerAd;
-  BannerAd buildBanner() {
-    return BannerAd(
-      adUnitId: BannerAd.testAdUnitId,
-      size: AdSize.smartBanner,
-      targetingInfo: targetingInfo,
-      listener: (MobileAdEvent event) {
-        if (event == MobileAdEvent.loaded) {
-          bannerAd..show();
-        }
-      },
-    );
-  }
+  // BannerAd bannerAd;
+  // BannerAd buildBanner() {
+  //   return BannerAd(
+  //     adUnitId: BannerAd.testAdUnitId,
+  //     size: AdSize.smartBanner,
+  //     targetingInfo: targetingInfo,
+  //     listener: (MobileAdEvent event) {
+  //       if (event == MobileAdEvent.loaded) {
+  //         bannerAd..show();
+  //       }
+  //     },
+  //   );
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -69,6 +63,9 @@ class _QuizScreenState extends State<QuizScreen> {
       },
       converter: (store) => store.state,
       builder: (context, state) => QuizPage(state),
+      onDidChange: (state) {
+        print(state.quizState.selected);
+      },
     );
   }
 }
@@ -158,13 +155,17 @@ class QuizPage extends StatelessWidget {
                     itemBuilder: (context, idx) {
                       return Container(
                         decoration: BoxDecoration(
-                          color: state.quizState.colors[idx],
+                          color: state.quizState.selected == idx
+                              ? Colors.green
+                              : Colors.white,
                           border: Border.all(width: 1.0),
                         ),
                         child: ListTile(
                           title: Text(state.quizState
                               .options[state.quizState.currentIndex][idx]),
                           onTap: () {
+                            StoreProvider.of<AppState>(context)
+                                .dispatch(ChangeSelectedColor(index: idx));
                             // _changeSelectedColor(optionsColor, idx);
                             // _informUserOfCorrectChoice(
                             //     question.correctAnswer, options, optionsColor);

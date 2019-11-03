@@ -11,12 +11,14 @@ class QuizState {
   final List<Color> colors;
   final List<List<String>> options;
   final List<Question> questions;
+  final int selected;
 
   QuizState(
       {@required this.currentIndex,
       @required this.colors,
       @required this.options,
-      @required this.questions});
+      @required this.questions,
+      @required this.selected});
 
   factory QuizState.inital() {
     return QuizState(
@@ -107,18 +109,23 @@ class QuizState {
             correctAnswer: 'Praying',
             incorrectAnswers: ['Giving to the poor', 'Fasting', 'Pilgrimage']),
       ],
+      selected: 4,
     );
   }
 
   QuizState copyWith({
     int currentIndex,
     List<Color> colors,
+    List<List<String>> options,
     List<Question> questions,
+    int selected,
   }) {
     return QuizState(
         currentIndex: currentIndex ?? this.currentIndex,
         colors: colors ?? this.colors,
-        questions: questions ?? this.questions);
+        options: options ?? this.options,
+        questions: questions ?? this.questions,
+        selected: selected ?? this.selected);
   }
 
   @override
@@ -128,9 +135,15 @@ class QuizState {
           runtimeType == other.runtimeType &&
           currentIndex == other.currentIndex &&
           colors == other.colors &&
-          questions == other.questions;
+          options == other.options &&
+          questions == other.questions &&
+          selected == other.selected;
 
   @override
   int get hashCode =>
-      currentIndex.hashCode ^ colors.hashCode ^ questions.hashCode;
+      currentIndex.hashCode ^
+      colors.hashCode ^
+      options.hashCode ^
+      questions.hashCode ^
+      selected.hashCode;
 }
