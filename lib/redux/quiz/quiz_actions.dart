@@ -1,7 +1,5 @@
 import 'package:flutter/foundation.dart';
 
-class GetQuestions {}
-
 class NextSubmit {}
 
 class ResetColors {}
