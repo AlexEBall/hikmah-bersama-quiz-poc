@@ -1,4 +1,4 @@
-// import 'dart:async';
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -64,7 +64,7 @@ class QuizScreen extends StatelessWidget {
       converter: (store) => store.state,
       builder: (context, state) => QuizPage(state),
       onDidChange: (state) {
-        print(state.quizState.selected);
+        print(state.quizState.currentIndex);
       },
     );
   }
@@ -75,6 +75,18 @@ class QuizPage extends StatelessWidget {
   final AppState state;
 
   final GlobalKey<ScaffoldState> _key = GlobalKey<ScaffoldState>();
+
+  void _nextSubmit(context) {
+    if (state.quizState.currentIndex < (state.quizState.questions.length - 1)) {
+      // print('here');
+      StoreProvider.of<AppState>(context).dispatch(IncrementCurrentIndex());
+      // StoreProvider.of<AppState>(context).dispatch(ResetColors());
+    } else {
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (_) => QuizFinishedPage()),
+      );
+    }
+  }
 
   // Quit quiz logic
   Future<bool> _onWillPop(context) async {
@@ -155,9 +167,7 @@ class QuizPage extends StatelessWidget {
                     itemBuilder: (context, idx) {
                       return Container(
                         decoration: BoxDecoration(
-                          color: state.quizState.selected == idx
-                              ? Colors.green
-                              : Colors.white,
+                          color: state.quizState.colors[idx],
                           border: Border.all(width: 1.0),
                         ),
                         child: ListTile(
@@ -166,9 +176,15 @@ class QuizPage extends StatelessWidget {
                           onTap: () {
                             StoreProvider.of<AppState>(context)
                                 .dispatch(ChangeSelectedColor(index: idx));
-                            // _changeSelectedColor(optionsColor, idx);
-                            // _informUserOfCorrectChoice(
-                            //     question.correctAnswer, options, optionsColor);
+
+                            StoreProvider.of<AppState>(context).dispatch(
+                                InformUserOfCorrectChoice(
+                                    correctAnswer: state
+                                        .quizState
+                                        .questions[state.quizState.currentIndex]
+                                        .correctAnswer));
+
+                            _nextSubmit(context);
                           },
                         ),
                       );

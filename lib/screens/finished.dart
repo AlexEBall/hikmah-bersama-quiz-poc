@@ -1,8 +1,17 @@
-// import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 // import '../models/question.dart';
 
 // import './home.dart';
 // import './check_answers.dart';
+
+class QuizFinishedPage extends StatelessWidget {
+  static const String id = 'finished_screen';
+
+  @override
+  Widget build(BuildContext context) {
+    return Text('Hello');
+  }
+}
 
 // class QuizFinishedPage extends StatelessWidget {
 //   static const String id = 'finished_screen';

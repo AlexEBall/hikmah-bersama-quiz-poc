@@ -4,10 +4,18 @@ class GetQuestions {}
 
 class NextSubmit {}
 
+class ResetColors {}
+
+class IncrementCurrentIndex {}
+
 class ChangeSelectedColor {
   final int index;
 
   ChangeSelectedColor({@required this.index});
 }
 
-class InformUserOfCorrectChoice {}
+class InformUserOfCorrectChoice {
+  final String correctAnswer;
+
+  InformUserOfCorrectChoice({@required this.correctAnswer});
+}
