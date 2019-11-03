@@ -11,6 +11,7 @@ final useQuizReducer = combineReducers<QuizState>([
       _informUserOfCorrectChoice),
   TypedReducer<QuizState, ResetColors>(_resetColors),
   TypedReducer<QuizState, IncrementCurrentIndex>(_incrementCurrentIndex),
+  // TypedReducer<QuizState, OneSecondDelay>(_oneSecondDelay),
 ]);
 
 QuizState _changeSelectedColor(QuizState state, ChangeSelectedColor action) {

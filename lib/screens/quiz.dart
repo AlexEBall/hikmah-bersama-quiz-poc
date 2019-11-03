@@ -176,13 +176,12 @@ class QuizPage extends StatelessWidget {
                                 .dispatch(ChangeSelectedColor(index: idx));
 
                             StoreProvider.of<AppState>(context).dispatch(
-                                InformUserOfCorrectChoice(
-                                    correctAnswer: state
-                                        .quizState
-                                        .questions[state.quizState.currentIndex]
-                                        .correctAnswer));
+                                oneSecondDelay(state
+                                    .quizState
+                                    .questions[state.quizState.currentIndex]
+                                    .correctAnswer));
 
-                            _nextSubmit(context);
+                            // _nextSubmit(context);
                           },
                         ),
                       );
