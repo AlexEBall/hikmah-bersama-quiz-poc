@@ -1,26 +1,15 @@
-import 'package:hikmah_bersama_quiz_poc/constants/constants.dart';
 import 'package:meta/meta.dart';
 import 'package:flutter/material.dart';
 
 import 'package:hikmah_bersama_quiz_poc/models/question.dart';
-
-// TODO: Could be extracted and tested
-List createOptions(List questions) {
-  return questions.map((question) {
-    String answer = question['correct_answer'];
-    List choices = question['incorrect_answers'];
-
-    choices.add(answer);
-    choices.shuffle();
-    return choices;
-  }).toList();
-}
+import 'package:hikmah_bersama_quiz_poc/utils/create_choices.dart';
+import 'package:hikmah_bersama_quiz_poc/constants/constants.dart';
 
 @immutable
 class QuizState {
   final int currentIndex;
   final List<Color> colors;
-  final options;
+  final List<List<String>> options;
   final List<Question> questions;
 
   QuizState(
@@ -124,13 +113,11 @@ class QuizState {
   QuizState copyWith({
     int currentIndex,
     List<Color> colors,
-    List<String> options,
     List<Question> questions,
   }) {
     return QuizState(
         currentIndex: currentIndex ?? this.currentIndex,
         colors: colors ?? this.colors,
-        options: options ?? this.options,
         questions: questions ?? this.questions);
   }
 
@@ -141,13 +128,9 @@ class QuizState {
           runtimeType == other.runtimeType &&
           currentIndex == other.currentIndex &&
           colors == other.colors &&
-          options == other.options &&
           questions == other.questions;
 
   @override
   int get hashCode =>
-      currentIndex.hashCode ^
-      colors.hashCode ^
-      options.hashCode ^
-      questions.hashCode;
+      currentIndex.hashCode ^ colors.hashCode ^ questions.hashCode;
 }

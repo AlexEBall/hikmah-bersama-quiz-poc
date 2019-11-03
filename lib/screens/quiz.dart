@@ -9,10 +9,9 @@ import 'package:hikmah_bersama_quiz_poc/redux/app/app_state.dart';
 import 'package:hikmah_bersama_quiz_poc/redux/quiz/quiz_actions.dart';
 import 'package:hikmah_bersama_quiz_poc/redux/processing/processing_actions.dart';
 
-// import '../models/question.dart';
-// import '../constants/constants.dart';
-// import './home.dart';
-// import './finished.dart';
+import 'package:hikmah_bersama_quiz_poc/constants/constants.dart';
+import './home.dart';
+import './finished.dart';
 
 // TODO: A view model will help to just pluck the state
 // related to the quiz
@@ -56,7 +55,6 @@ class _QuizScreenState extends State<QuizScreen> {
         if (event == MobileAdEvent.loaded) {
           bannerAd..show();
         }
-        print(event);
       },
     );
   }
@@ -94,7 +92,7 @@ class QuizPage extends StatelessWidget {
             FlatButton(
               child: Text("Yes"),
               onPressed: () {
-                // Navigator.pushNamed(context, HomeScreen.id);
+                Navigator.pushNamed(context, HomeScreen.id);
               },
             ),
             FlatButton(
@@ -111,7 +109,6 @@ class QuizPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(state.processing);
     return WillPopScope(
       onWillPop: () {
         return _onWillPop(context);
@@ -140,37 +137,42 @@ class QuizPage extends StatelessWidget {
                     children: <Widget>[
                       CircleAvatar(
                         backgroundColor: Colors.white70,
-                        // child: Text("${_currentIndex + 1}"),
-                        child: Text('#1'),
+                        child: Text("${state.quizState.currentIndex + 1}"),
                       ),
                       SizedBox(width: 16.0),
-                      // Expanded(
-                      //   child: Text(widget.questions[_currentIndex].question,
-                      //       style: kQuestionStyle),
-                      // ),
+                      Expanded(
+                        child: Text(
+                            state
+                                .quizState
+                                .questions[state.quizState.currentIndex]
+                                .question,
+                            style: kQuestionStyle),
+                      ),
                     ],
                   ),
                   SizedBox(height: 20.0),
-                  // ListView.builder(
-                  //   shrinkWrap: true,
-                  //   itemCount: options.length,
-                  //   itemBuilder: (context, idx) {
-                  //     return Container(
-                  //       decoration: BoxDecoration(
-                  //         color: optionsColor[idx],
-                  //         border: Border.all(width: 1.0),
-                  //       ),
-                  //       child: ListTile(
-                  //         title: Text(options[idx]),
-                  //         onTap: () {
-                  //           _changeSelectedColor(optionsColor, idx);
-                  //           _informUserOfCorrectChoice(
-                  //               question.correctAnswer, options, optionsColor);
-                  //         },
-                  //       ),
-                  //     );
-                  //   },
-                  // ),
+                  ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: state
+                        .quizState.options[state.quizState.currentIndex].length,
+                    itemBuilder: (context, idx) {
+                      return Container(
+                        decoration: BoxDecoration(
+                          color: state.quizState.colors[idx],
+                          border: Border.all(width: 1.0),
+                        ),
+                        child: ListTile(
+                          title: Text(state.quizState
+                              .options[state.quizState.currentIndex][idx]),
+                          onTap: () {
+                            // _changeSelectedColor(optionsColor, idx);
+                            // _informUserOfCorrectChoice(
+                            //     question.correctAnswer, options, optionsColor);
+                          },
+                        ),
+                      );
+                    },
+                  ),
                 ],
               ),
             )
