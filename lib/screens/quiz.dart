@@ -62,9 +62,7 @@ class QuizScreen extends StatelessWidget {
       },
       converter: (store) => store.state,
       builder: (context, state) => QuizPage(state),
-      onDidChange: (state) {
-        print(state.quizState.currentIndex);
-      },
+      onDidChange: (state) {},
     );
   }
 }
@@ -77,7 +75,6 @@ class QuizPage extends StatelessWidget {
 
   void _nextSubmit(context) {
     if (state.quizState.currentIndex < (state.quizState.questions.length - 1)) {
-      // StoreProvider.of<AppState>(context).dispatch(IncrementCurrentIndex());
     } else {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (_) => QuizFinishedPage()),
@@ -174,11 +171,13 @@ class QuizPage extends StatelessWidget {
                             StoreProvider.of<AppState>(context)
                                 .dispatch(ChangeSelectedColor(index: idx));
 
+                            StoreProvider.of<AppState>(context)
+                                .dispatch(oneSecondDelay());
+
                             StoreProvider.of<AppState>(context).dispatch(
-                                oneSecondDelay(state
-                                    .quizState
-                                    .questions[state.quizState.currentIndex]
-                                    .correctAnswer));
+                                AddAnswer(
+                                    selection: state.quizState.options[
+                                        state.quizState.currentIndex][idx]));
 
                             StoreProvider.of<AppState>(context)
                                 .dispatch(resetQuestionState());

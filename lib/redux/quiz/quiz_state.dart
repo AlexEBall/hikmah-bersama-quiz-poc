@@ -11,14 +11,14 @@ class QuizState {
   final List<Color> colors;
   final List<List<String>> options;
   final List<Question> questions;
-  final int selected;
+  final Map<String, String> answers;
 
   QuizState(
       {@required this.currentIndex,
       @required this.colors,
       @required this.options,
       @required this.questions,
-      @required this.selected});
+      @required this.answers});
 
   factory QuizState.inital() {
     return QuizState(
@@ -52,7 +52,8 @@ class QuizState {
             type: Type.multiple,
             difficulty: Difficulty.easy,
             question: 'Islam means to obey Allah (s.w.t) and obey his commands',
-            correctAnswer: 'Nabi',
+            correctAnswer:
+                'Islam means to obey Allah (s.w.t) and obey his commands',
             incorrectAnswers: [
               'Islam means to obey our parents',
               'Islam means to obey our teachers and elders',
@@ -109,7 +110,7 @@ class QuizState {
             correctAnswer: 'Praying',
             incorrectAnswers: ['Giving to the poor', 'Fasting', 'Pilgrimage']),
       ],
-      selected: 4,
+      answers: {},
     );
   }
 
@@ -118,14 +119,14 @@ class QuizState {
     List<Color> colors,
     List<List<String>> options,
     List<Question> questions,
-    int selected,
+    Map<String, String> answers,
   }) {
     return QuizState(
         currentIndex: currentIndex ?? this.currentIndex,
         colors: colors ?? this.colors,
         options: options ?? this.options,
         questions: questions ?? this.questions,
-        selected: selected ?? this.selected);
+        answers: answers ?? this.answers);
   }
 
   @override
@@ -137,7 +138,7 @@ class QuizState {
           colors == other.colors &&
           options == other.options &&
           questions == other.questions &&
-          selected == other.selected;
+          answers == other.answers;
 
   @override
   int get hashCode =>
@@ -145,5 +146,5 @@ class QuizState {
       colors.hashCode ^
       options.hashCode ^
       questions.hashCode ^
-      selected.hashCode;
+      answers.hashCode;
 }

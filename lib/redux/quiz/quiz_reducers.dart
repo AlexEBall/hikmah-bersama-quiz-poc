@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:redux/redux.dart';
 
@@ -11,7 +10,7 @@ final useQuizReducer = combineReducers<QuizState>([
       _informUserOfCorrectChoice),
   TypedReducer<QuizState, ResetColors>(_resetColors),
   TypedReducer<QuizState, IncrementCurrentIndex>(_incrementCurrentIndex),
-  // TypedReducer<QuizState, OneSecondDelay>(_oneSecondDelay),
+  TypedReducer<QuizState, AddAnswer>(_addAnswer),
 ]);
 
 QuizState _changeSelectedColor(QuizState state, ChangeSelectedColor action) {
@@ -24,7 +23,6 @@ QuizState _changeSelectedColor(QuizState state, ChangeSelectedColor action) {
     colors.add(Color(0xFFFFFFFF));
 
     // TODO: Disable other choices
-    // TODO: Add to answers object
 
   } else {
     colors[action.index] = Color(0xff4caf50);
@@ -35,9 +33,9 @@ QuizState _changeSelectedColor(QuizState state, ChangeSelectedColor action) {
 
 QuizState _informUserOfCorrectChoice(
     QuizState state, InformUserOfCorrectChoice action) {
-  final List<Color> colors = [...state.colors];
-  final int answer =
-      state.options[state.currentIndex].indexOf(action.correctAnswer);
+  final List<Color> colors = state.colors.sublist(0);
+  final int answer = state.options[state.currentIndex]
+      .indexOf(state.questions[state.currentIndex].correctAnswer);
   colors[answer] = Color(0xFFFF9800);
 
   return state.copyWith(colors: colors);
@@ -60,4 +58,13 @@ QuizState _incrementCurrentIndex(
   curr++;
 
   return state.copyWith(currentIndex: curr);
+}
+
+QuizState _addAnswer(QuizState state, AddAnswer action) {
+  Map<String, String> m = {...state.answers};
+
+  final String key = state.currentIndex.toString();
+
+  m[key] = action.selection;
+  return state.copyWith(answers: m);
 }

@@ -15,27 +15,32 @@ class ChangeSelectedColor {
   ChangeSelectedColor({@required this.index});
 }
 
-class InformUserOfCorrectChoice {
-  final String correctAnswer;
+class InformUserOfCorrectChoice {}
 
-  InformUserOfCorrectChoice({@required this.correctAnswer});
+class AddAnswer {
+  final String selection;
+
+  AddAnswer({@required this.selection});
 }
 
 // TODO: Refactore one second delay into function that takes actions
-ThunkAction<AppState> oneSecondDelay(String correctAnswer) {
+ThunkAction<AppState> oneSecondDelay() {
   return (Store<AppState> store) async {
-    String answer = await Future<String>.delayed(Duration(seconds: 1), () {
-      return correctAnswer;
+    bool hasASecondPassed =
+        await Future<bool>.delayed(Duration(seconds: 1), () {
+      return true;
     });
 
-    return store.dispatch(InformUserOfCorrectChoice(correctAnswer: answer));
+    if (hasASecondPassed) {
+      return store.dispatch(InformUserOfCorrectChoice());
+    }
   };
 }
 
 ThunkAction<AppState> resetQuestionState() {
   return (Store<AppState> store) async {
     bool hasASecondPassed =
-        await Future<bool>.delayed(Duration(seconds: 3), () {
+        await Future<bool>.delayed(Duration(seconds: 2), () {
       return true;
     });
 
