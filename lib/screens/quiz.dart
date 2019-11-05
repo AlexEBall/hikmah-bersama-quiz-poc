@@ -8,17 +8,15 @@ import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 import 'package:hikmah_bersama_quiz_poc/redux/app/app_state.dart';
 import 'package:hikmah_bersama_quiz_poc/redux/quiz/quiz_actions.dart';
 import 'package:hikmah_bersama_quiz_poc/redux/processing/processing_actions.dart';
+import 'package:hikmah_bersama_quiz_poc/redux/adMob/adMob_actions.dart';
 
 import 'package:hikmah_bersama_quiz_poc/constants/constants.dart';
 import './home.dart';
 import './finished.dart';
 
-// TODO: A view model will help to just pluck the state
-// related to the quiz
+// TODO: A view model will help to just pluck the state related to the quiz
 class QuizScreen extends StatelessWidget {
   static const String id = 'quiz_screen';
-  // TODO: I feel like this ad mob stuff could be in its
-  // own state that gets initialized on the onInit method
   // @override
   // void initState() {
   //   super.initState();
@@ -26,39 +24,15 @@ class QuizScreen extends StatelessWidget {
   // bannerAd = buildBanner()..load();
   // }
 
-  // @override
-  // void dispose() {
-  //   super.dispose();
-  // bannerAd..dispose();
-  // }
-
-  // static final MobileAdTargetingInfo targetingInfo = MobileAdTargetingInfo(
-  //   testDevices: DotEnv().env['TEST_AD_UNIT'] != null
-  //       ? [DotEnv().env['TEST_AD_UNIT']]
-  //       : null,
-  //   keywords: ['Meditation', 'Philantrophy', 'Breathing', 'Yoga'],
-  // );
-
-  // BannerAd bannerAd;
-  // BannerAd buildBanner() {
-  //   return BannerAd(
-  //     adUnitId: BannerAd.testAdUnitId,
-  //     size: AdSize.smartBanner,
-  //     targetingInfo: targetingInfo,
-  //     listener: (MobileAdEvent event) {
-  //       if (event == MobileAdEvent.loaded) {
-  //         bannerAd..show();
-  //       }
-  //     },
-  //   );
-  // }
-
   @override
   Widget build(BuildContext context) {
     return StoreConnector<AppState, AppState>(
       distinct: true,
       onInit: (store) {
+        FirebaseAdMob.instance.initialize(appId: DotEnv().env['AD_MOD_ID']);
         store.dispatch(IsProcessing(false));
+        store.dispatch(
+            BuildBannerAd(targetingInfo: store.state.adMobState.targetingInfo));
       },
       converter: (store) => store.state,
       builder: (context, state) => QuizPage(state),
@@ -82,36 +56,11 @@ class QuizPage extends StatelessWidget {
     }
   }
 
-  // Quit quiz logic
-  Future<bool> _onWillPop(context) async {
-    return showDialog<bool>(
-      context: context,
-      builder: (_) {
-        return AlertDialog(
-          content: Text(
-              "Are you sure you want to quit the quiz? All your progress will be lost."),
-          title: Text("Warning!"),
-          actions: <Widget>[
-            FlatButton(
-              child: Text("Yes"),
-              onPressed: () {
-                Navigator.pushNamed(context, HomeScreen.id);
-              },
-            ),
-            FlatButton(
-              child: Text("No"),
-              onPressed: () {
-                Navigator.pop(context, false);
-              },
-            ),
-          ],
-        );
-      },
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
+    state.adMobState.bannerAd
+      ..load()
+      ..show();
     return WillPopScope(
       onWillPop: () {
         return _onWillPop(context);
@@ -195,4 +144,32 @@ class QuizPage extends StatelessWidget {
       ),
     );
   }
+}
+
+// Quit quiz logic
+Future<bool> _onWillPop(context) async {
+  return showDialog<bool>(
+    context: context,
+    builder: (_) {
+      return AlertDialog(
+        content: Text(
+            "Are you sure you want to quit the quiz? All your progress will be lost."),
+        title: Text("Warning!"),
+        actions: <Widget>[
+          FlatButton(
+            child: Text("Yes"),
+            onPressed: () {
+              Navigator.pushNamed(context, HomeScreen.id);
+            },
+          ),
+          FlatButton(
+            child: Text("No"),
+            onPressed: () {
+              Navigator.pop(context, false);
+            },
+          ),
+        ],
+      );
+    },
+  );
 }
