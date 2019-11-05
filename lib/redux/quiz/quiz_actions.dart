@@ -4,7 +4,7 @@ import 'package:flutter/foundation.dart';
 
 import 'package:hikmah_bersama_quiz_poc/redux/app/app_state.dart';
 
-import 'package:hikmah_bersama_quiz_poc/screens/finished.dart';
+import 'package:hikmah_bersama_quiz_poc/screens/cause.dart';
 import 'package:hikmah_bersama_quiz_poc/redux/navigation/navigation_actions.dart';
 
 class IncrementCurrentIndex {}
@@ -53,7 +53,7 @@ ThunkAction<AppState> resetQuestionState() {
           store.state.quizState.questions.length - 1) {
         store.dispatch(IncrementCurrentIndex());
       } else {
-        store.dispatch(NavigateTo(route: QuizFinishedPage.id));
+        store.dispatch(NavigateTo(route: CauseScreen.id));
       }
     }
   };

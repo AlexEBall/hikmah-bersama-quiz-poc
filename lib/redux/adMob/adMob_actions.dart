@@ -6,3 +6,5 @@ class BuildBannerAd {
 
   BuildBannerAd({@required this.targetingInfo});
 }
+
+class DestroyBannerAd {}

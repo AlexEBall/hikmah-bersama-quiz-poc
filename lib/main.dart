@@ -12,7 +12,7 @@ import 'package:hikmah_bersama_quiz_poc/screens/home.dart';
 import 'package:hikmah_bersama_quiz_poc/screens/quiz.dart';
 import 'package:hikmah_bersama_quiz_poc/screens/error.dart';
 import 'package:hikmah_bersama_quiz_poc/screens/finished.dart';
-import 'package:hikmah_bersama_quiz_poc/screens/check_answers.dart';
+import 'package:hikmah_bersama_quiz_poc/screens/cause.dart';
 
 Future main() async {
   // final Store<AppState> _store =
@@ -52,6 +52,7 @@ class MyApp extends StatelessWidget {
           HomeScreen.id: (context) => HomeScreen(),
           QuizScreen.id: (context) => QuizScreen(),
           QuizFinishedPage.id: (context) => QuizFinishedPage(),
+          CauseScreen.id: (context) => CauseScreen(),
           ErrorPage.id: (context) => ErrorPage(),
         },
       ),
