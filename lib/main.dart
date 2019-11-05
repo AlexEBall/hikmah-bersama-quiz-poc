@@ -6,8 +6,13 @@ import 'package:flutter_redux/flutter_redux.dart';
 
 import 'package:hikmah_bersama_quiz_poc/store/store.dart';
 import 'package:hikmah_bersama_quiz_poc/redux/app/app_state.dart';
+import 'package:hikmah_bersama_quiz_poc/redux/keys.dart';
 
-import './screens/home.dart';
+import 'package:hikmah_bersama_quiz_poc/screens/home.dart';
+import 'package:hikmah_bersama_quiz_poc/screens/quiz.dart';
+import 'package:hikmah_bersama_quiz_poc/screens/error.dart';
+import 'package:hikmah_bersama_quiz_poc/screens/finished.dart';
+import 'package:hikmah_bersama_quiz_poc/screens/check_answers.dart';
 
 Future main() async {
   // final Store<AppState> _store =
@@ -29,20 +34,25 @@ class MyApp extends StatelessWidget {
       store: store,
       child: MaterialApp(
         title: 'Hikmah / Bersams Quiz POC',
+        navigatorKey: Keys.navKey,
         theme: ThemeData(
-            primarySwatch: Colors.blue,
-            accentColor: Colors.indigo,
-            fontFamily: "UnicaOne",
-            buttonColor: Colors.pink,
-            buttonTheme: ButtonThemeData(
-                buttonColor: Colors.pink,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20.0),
-                ),
-                textTheme: ButtonTextTheme.primary)),
+          primarySwatch: Colors.blue,
+          accentColor: Colors.indigo,
+          fontFamily: "UnicaOne",
+          buttonColor: Colors.pink,
+          buttonTheme: ButtonThemeData(
+              buttonColor: Colors.pink,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20.0),
+              ),
+              textTheme: ButtonTextTheme.primary),
+        ),
         initialRoute: HomeScreen.id,
         routes: {
           HomeScreen.id: (context) => HomeScreen(),
+          QuizScreen.id: (context) => QuizScreen(),
+          QuizFinishedPage.id: (context) => QuizFinishedPage(),
+          ErrorPage.id: (context) => ErrorPage(),
         },
       ),
     );

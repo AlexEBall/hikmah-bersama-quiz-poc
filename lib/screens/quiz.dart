@@ -17,12 +17,6 @@ import './finished.dart';
 // TODO: A view model will help to just pluck the state related to the quiz
 class QuizScreen extends StatelessWidget {
   static const String id = 'quiz_screen';
-  // @override
-  // void initState() {
-  //   super.initState();
-  // FirebaseAdMob.instance.initialize(appId: DotEnv().env['AD_MOD_ID']);
-  // bannerAd = buildBanner()..load();
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -46,15 +40,6 @@ class QuizPage extends StatelessWidget {
   final AppState state;
 
   final GlobalKey<ScaffoldState> _key = GlobalKey<ScaffoldState>();
-
-  void _nextSubmit(context) {
-    if (state.quizState.currentIndex < (state.quizState.questions.length - 1)) {
-    } else {
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (_) => QuizFinishedPage()),
-      );
-    }
-  }
 
   @override
   Widget build(BuildContext context) {

@@ -1,9 +1,11 @@
 import 'package:redux/redux.dart';
 import 'package:redux_thunk/redux_thunk.dart';
-
 import 'package:flutter/foundation.dart';
 
 import 'package:hikmah_bersama_quiz_poc/redux/app/app_state.dart';
+
+import 'package:hikmah_bersama_quiz_poc/screens/finished.dart';
+import 'package:hikmah_bersama_quiz_poc/redux/navigation/navigation_actions.dart';
 
 class IncrementCurrentIndex {}
 
@@ -47,9 +49,12 @@ ThunkAction<AppState> resetQuestionState() {
     if (hasASecondPassed) {
       store.dispatch(ResetColors());
 
-      // Todo: Need a global navigator to provide the conditional for this
-      // and routing purposes
-      store.dispatch(IncrementCurrentIndex());
+      if (store.state.quizState.currentIndex <
+          store.state.quizState.questions.length - 1) {
+        store.dispatch(IncrementCurrentIndex());
+      } else {
+        store.dispatch(NavigateTo(route: QuizFinishedPage.id));
+      }
     }
   };
 }
