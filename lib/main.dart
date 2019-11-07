@@ -8,6 +8,7 @@ import 'package:hikmah_bersama_quiz_poc/store/store.dart';
 import 'package:hikmah_bersama_quiz_poc/redux/app/app_state.dart';
 import 'package:hikmah_bersama_quiz_poc/redux/keys.dart';
 
+import 'package:hikmah_bersama_quiz_poc/screens/intro.dart';
 import 'package:hikmah_bersama_quiz_poc/screens/home.dart';
 import 'package:hikmah_bersama_quiz_poc/screens/quiz.dart';
 import 'package:hikmah_bersama_quiz_poc/screens/error.dart';
@@ -47,8 +48,9 @@ class MyApp extends StatelessWidget {
               ),
               textTheme: ButtonTextTheme.primary),
         ),
-        initialRoute: HomeScreen.id,
+        initialRoute: IntroScreen.id,
         routes: {
+          IntroScreen.id: (context) => IntroScreen(),
           HomeScreen.id: (context) => HomeScreen(),
           QuizScreen.id: (context) => QuizScreen(),
           QuizFinishedPage.id: (context) => QuizFinishedPage(),
