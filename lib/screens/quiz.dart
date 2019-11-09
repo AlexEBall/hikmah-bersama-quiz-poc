@@ -43,9 +43,9 @@ class QuizPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    state.adMobState.bannerAd
-      ..load()
-      ..show();
+    // state.adMobState.bannerAd
+    //   ..load()
+    //   ..show();
     return WillPopScope(
       onWillPop: () {
         return _onWillPop(context);

@@ -23,7 +23,7 @@ class QuizState {
   factory QuizState.inital() {
     return QuizState(
       currentIndex: 0,
-      colors: [Colors.white, Colors.white, Colors.white, Colors.white],
+      colors: [kPrimary, kPrimary, kPrimary, kPrimary],
       options: createOptions(kQuestions),
       questions: [
         Question(

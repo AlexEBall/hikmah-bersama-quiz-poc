@@ -7,6 +7,7 @@ import 'package:flutter_redux/flutter_redux.dart';
 import 'package:hikmah_bersama_quiz_poc/store/store.dart';
 import 'package:hikmah_bersama_quiz_poc/redux/app/app_state.dart';
 import 'package:hikmah_bersama_quiz_poc/redux/keys.dart';
+import 'package:hikmah_bersama_quiz_poc/constants/constants.dart';
 
 import 'package:hikmah_bersama_quiz_poc/screens/intro.dart';
 import 'package:hikmah_bersama_quiz_poc/screens/home.dart';
@@ -37,18 +38,18 @@ class MyApp extends StatelessWidget {
         title: 'Hikmah / Bersams Quiz POC',
         navigatorKey: Keys.navKey,
         theme: ThemeData(
-          primarySwatch: Colors.blue,
-          accentColor: Colors.indigo,
+          primaryColor: kPrimary,
+          accentColor: kSecondary,
           fontFamily: "UnicaOne",
-          buttonColor: Colors.pink,
+          buttonColor: kActive,
           buttonTheme: ButtonThemeData(
-              buttonColor: Colors.pink,
+              buttonColor: kActive,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20.0),
               ),
               textTheme: ButtonTextTheme.primary),
         ),
-        initialRoute: IntroScreen.id,
+        initialRoute: QuizScreen.id,
         routes: {
           IntroScreen.id: (context) => IntroScreen(),
           HomeScreen.id: (context) => HomeScreen(),

@@ -4,7 +4,7 @@ import 'package:intro_slider/intro_slider.dart';
 
 import 'package:hikmah_bersama_quiz_poc/redux/app/app_state.dart';
 import 'package:hikmah_bersama_quiz_poc/redux/slides/slides_action.dart';
-import 'package:hikmah_bersama_quiz_poc/screens/home.dart';
+// import 'package:hikmah_bersama_quiz_poc/screens/home.dart';
 import 'package:hikmah_bersama_quiz_poc/screens/quiz.dart';
 
 class IntroScreen extends StatelessWidget {
@@ -30,9 +30,12 @@ class IntroPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return IntroSlider(
-        slides: state.slidesState.slides,
-        nameDoneBtn: 'Get Started',
-        onDonePress: () => Navigator.pushNamed(context, QuizScreen.id));
+    return Container(
+      margin: EdgeInsets.only(bottom: 30.0),
+      child: IntroSlider(
+          slides: state.slidesState.slides,
+          nameDoneBtn: 'Get Started',
+          onDonePress: () => Navigator.pushNamed(context, QuizScreen.id)),
+    );
   }
 }

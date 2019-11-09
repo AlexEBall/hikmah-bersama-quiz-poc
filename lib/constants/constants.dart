@@ -3,8 +3,18 @@ import 'package:flutter/material.dart';
 const kQuestionStyle =
     TextStyle(fontSize: 18.0, fontWeight: FontWeight.w500, color: Colors.white);
 
-const kSelectedColor = Color(0xFFB74093);
-const kCorrectColor = Color(0xffaabbcc);
+const kActive = Color(0xFF219329);
+const kBackground = Color(0xFF9def9c);
+const kHover = Color(0xFF52ac58);
+const kPrimary = Color(0xFF69d070);
+const kError = Color(0xFFf8524c);
+
+const kCard = Color(0xFF3ab143);
+const kSecondary = Color(0xFFFFE2D1);
+
+const kSlides1 = Color(0xFF69D070);
+const kSlides2 = Color(0xFF5E4C5A);
+const kSlides3 = Color(0xFF55917F);
 
 var kQuestions = [
   {

@@ -3,6 +3,7 @@ import 'package:redux/redux.dart';
 
 import 'package:hikmah_bersama_quiz_poc/redux/quiz/quiz_actions.dart';
 import 'package:hikmah_bersama_quiz_poc/redux/quiz/quiz_state.dart';
+import 'package:hikmah_bersama_quiz_poc/constants/constants.dart';
 
 final useQuizReducer = combineReducers<QuizState>([
   TypedReducer<QuizState, ChangeSelectedColor>(_changeSelectedColor),
@@ -16,16 +17,16 @@ final useQuizReducer = combineReducers<QuizState>([
 QuizState _changeSelectedColor(QuizState state, ChangeSelectedColor action) {
   final List<Color> colors = [...state.colors];
 
-  if (colors.contains(Color(0xff4caf50))) {
-    final int selected = colors.indexOf((Color(0xff4caf50)));
+  if (colors.contains(kActive)) {
+    final int selected = colors.indexOf((kActive));
 
     colors.removeAt(selected);
-    colors.add(Color(0xFFFFFFFF));
+    colors.add(kPrimary);
 
     // TODO: Disable other choices
 
   } else {
-    colors[action.index] = Color(0xff4caf50);
+    colors[action.index] = kActive;
   }
 
   return state.copyWith(colors: colors);
@@ -36,18 +37,13 @@ QuizState _informUserOfCorrectChoice(
   final List<Color> colors = state.colors.sublist(0);
   final int answer = state.options[state.currentIndex]
       .indexOf(state.questions[state.currentIndex].correctAnswer);
-  colors[answer] = Color(0xFFFF9800);
+  colors[answer] = kSecondary;
 
   return state.copyWith(colors: colors);
 }
 
 QuizState _resetColors(QuizState state, ResetColors action) {
-  final List<Color> colors = [
-    Color(0xFFFFFFFF),
-    Color(0xFFFFFFFF),
-    Color(0xFFFFFFFF),
-    Color(0xFFFFFFFF)
-  ];
+  final List<Color> colors = [kPrimary, kPrimary, kPrimary, kPrimary];
 
   return state.copyWith(colors: colors);
 }

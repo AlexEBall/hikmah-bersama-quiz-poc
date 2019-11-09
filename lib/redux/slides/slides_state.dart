@@ -1,6 +1,7 @@
 import 'package:meta/meta.dart';
 import 'package:flutter/material.dart';
 import 'package:intro_slider/slide_object.dart';
+import 'package:hikmah_bersama_quiz_poc/constants/constants.dart';
 
 @immutable
 class SlidesState {
@@ -11,25 +12,23 @@ class SlidesState {
   factory SlidesState.inital() {
     return SlidesState(slides: [
       Slide(
-        title: "ERASER",
-        description:
-            "Allow miles wound place the leave had. To sitting subject no improve studied limited",
+        title: "Take a quiz",
+        description: "Learn more about Islam.",
         // pathImage: "images/photo_eraser.png",
-        backgroundColor: Color(0xfff5a623),
+        backgroundColor: kSlides1,
       ),
       Slide(
-        title: "PENCIL",
+        title: "Benefit a cause",
         description:
-            "Ye indulgence unreserved connection alteration appearance",
+            "From each quiz you pass, we pay a portion to a non-profit charity",
         // pathImage: "images/photo_pencil.png",
-        backgroundColor: Color(0xff203152),
+        backgroundColor: kSlides2,
       ),
       Slide(
-        title: "RULER",
-        description:
-            "Much evil soon high in hope do view. Out may few northward believing attempted. Yet timed being songs marry one defer men our. Although finished blessing do of",
+        title: "Help out",
+        description: "Help families, end hunger",
         // pathImage: "images/photo_ruler.png",
-        backgroundColor: Color(0xff9932CC),
+        backgroundColor: kSlides3,
       ),
     ]);
   }
