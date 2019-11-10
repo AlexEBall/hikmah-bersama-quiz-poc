@@ -1,12 +1,10 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:firebase_admob/firebase_admob.dart';
 
 import 'package:hikmah_bersama_quiz_poc/redux/app/app_state.dart';
 import 'package:hikmah_bersama_quiz_poc/redux/quiz/quiz_actions.dart';
 
+import 'package:hikmah_bersama_quiz_poc/components/quiz/card_profile.dart';
 import 'package:hikmah_bersama_quiz_poc/constants/constants.dart';
 
 class QuizCard extends StatelessWidget {
@@ -25,12 +23,10 @@ class QuizCard extends StatelessWidget {
           color: kCard),
       margin: EdgeInsets.fromLTRB(15.0, 40.0, 15.0, 90.0),
       padding: EdgeInsets.all(16.0),
-      // height: 450,
       child: Column(
         children: <Widget>[
-          SizedBox(
-            height: 50.0,
-          ),
+          CardProfile(),
+          SizedBox(height: 10.0),
           Row(
             children: <Widget>[
               CircleAvatar(
