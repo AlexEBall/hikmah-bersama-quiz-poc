@@ -48,7 +48,7 @@ class CausePage extends StatelessWidget {
               Expanded(
                 flex: 4,
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                  padding: EdgeInsets.symmetric(horizontal: 20.0),
                   child: Column(
                     children: <Widget>[DonationHeader(), ProfileHeader()],
                   ),
@@ -56,14 +56,34 @@ class CausePage extends StatelessWidget {
               ),
               Expanded(
                 flex: 6,
-                child: Container(
-                  width: double.infinity,
-                  child: Text('Yadda'),
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 20.0),
+                  child: Description(),
                 ),
               )
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class Description extends StatelessWidget {
+  const Description();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      padding: EdgeInsets.only(top: 10.0),
+      child: Column(
+        children: <Widget>[
+          Text(
+              "Because of the donations from people like you we're close to reaching our goal"),
+          SizedBox(height: 50.0),
+          Text('You got 9 out of 10 correct!')
+        ],
       ),
     );
   }

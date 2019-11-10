@@ -14,20 +14,20 @@ class SlidesState {
       Slide(
         title: "Take a quiz",
         description: "Learn more about Islam.",
-        // pathImage: "images/photo_eraser.png",
+        pathImage: "assets/images/islam.png",
         backgroundColor: kSlides1,
       ),
       Slide(
         title: "Benefit a cause",
         description:
             "From each quiz you pass, we pay a portion to a non-profit charity",
-        // pathImage: "images/photo_pencil.png",
+        pathImage: "assets/images/take_quiz.png",
         backgroundColor: kSlides2,
       ),
       Slide(
         title: "Help out",
         description: "Help families, end hunger",
-        // pathImage: "images/photo_ruler.png",
+        pathImage: "assets/images/volunteer.png",
         backgroundColor: kSlides3,
       ),
     ]);

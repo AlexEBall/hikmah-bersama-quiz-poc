@@ -49,7 +49,7 @@ class MyApp extends StatelessWidget {
               ),
               textTheme: ButtonTextTheme.primary),
         ),
-        initialRoute: CauseScreen.id,
+        initialRoute: IntroScreen.id,
         routes: {
           IntroScreen.id: (context) => IntroScreen(),
           HomeScreen.id: (context) => HomeScreen(),

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
+import 'package:hikmah_bersama_quiz_poc/constants/constants.dart';
+
 class DonationHeader extends StatelessWidget {
   const DonationHeader();
 
@@ -49,9 +51,17 @@ class DonationHeader extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
                 Container(
-                  child: Text(
-                    '\$125,000 funds collected from \$500,000',
+                  child: RichText(
                     textAlign: TextAlign.left,
+                    text: TextSpan(
+                      style: DefaultTextStyle.of(context).style,
+                      children: <TextSpan>[
+                        TextSpan(
+                            text: '\$125,000',
+                            style: TextStyle(color: kActive)),
+                        TextSpan(text: ' funds collected from \$500,000')
+                      ],
+                    ),
                   ),
                 ),
               ],

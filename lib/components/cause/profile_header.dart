@@ -39,7 +39,7 @@ class ProfileHeader extends StatelessWidget {
                   children: <Widget>[
                     Icon(Icons.people),
                     SizedBox(
-                      width: 12.0,
+                      width: 8.0,
                     ),
                     Text('23')
                   ],
@@ -55,9 +55,9 @@ class ProfileHeader extends StatelessWidget {
                   children: <Widget>[
                     Icon(Icons.calendar_today),
                     SizedBox(
-                      width: 12.0,
+                      width: 8.0,
                     ),
-                    Text('23')
+                    Text('15 days left')
                   ],
                 ),
               ),
