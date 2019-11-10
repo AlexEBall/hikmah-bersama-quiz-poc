@@ -21,6 +21,7 @@ dependencies:
   redux_thunk: ^0.2.1
   intro_views_flutter: ^2.8.0
   intro_slider: ^2.2.8
+  percent_indicator: '^2.1.1'
 
 dev_dependencies:
   # have to use an older version of test

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:percent_indicator/circular_percent_indicator.dart';
 
 class DonationHeader extends StatelessWidget {
   const DonationHeader();
@@ -18,15 +19,29 @@ class DonationHeader extends StatelessWidget {
                 Expanded(
                   child: Container(
                     child: Text(
-                        'Something sdkfj  fsldkj aslfj aasdlfj sfkljasd fklasjdf lask dfsljd ksljdf '),
+                      'Help rebuild their school',
+                      style: TextStyle(fontSize: 28.0),
+                    ),
                   ),
                 ),
                 Container(
-                    margin: EdgeInsets.only(top: 15.0),
-                    decoration: BoxDecoration(color: Colors.red),
-                    height: 50.0,
-                    width: 50.0,
-                    child: Text('hey'))
+                  margin: EdgeInsets.only(top: 15.0),
+                  height: 50.0,
+                  width: 50.0,
+                  child: CircularPercentIndicator(
+                    radius: 40.0,
+                    lineWidth: 5.0,
+                    animation: true,
+                    percent: 0.7,
+                    center: Text(
+                      "70%",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold, fontSize: 10.0),
+                    ),
+                    circularStrokeCap: CircularStrokeCap.round,
+                    progressColor: Theme.of(context).primaryColor,
+                  ),
+                )
               ],
             ),
             Row(
@@ -35,7 +50,7 @@ class DonationHeader extends StatelessWidget {
               children: <Widget>[
                 Container(
                   child: Text(
-                    'Something on the bottom here',
+                    '\$125,000 funds collected from \$500,000',
                     textAlign: TextAlign.left,
                   ),
                 ),
