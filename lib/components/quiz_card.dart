@@ -56,10 +56,24 @@ class QuizCard extends StatelessWidget {
               return Container(
                 decoration: BoxDecoration(
                     color: state.quizState.colors[idx],
-                    borderRadius: BorderRadius.circular(4.0)),
+                    borderRadius: BorderRadius.circular(4.0),
+                    boxShadow: [
+                      BoxShadow(
+                        color: kHover,
+                        offset: new Offset(0.5, 0.5),
+                      )
+                    ]),
                 child: ListTile(
-                  title: Text(state
-                      .quizState.options[state.quizState.currentIndex][idx]),
+                  title: Text(
+                      state.quizState.options[state.quizState.currentIndex]
+                          [idx],
+                      style: TextStyle(color: Colors.white70, shadows: [
+                        Shadow(
+                          blurRadius: 40.0,
+                          color: Colors.black,
+                          offset: Offset(5.0, 5.0),
+                        ),
+                      ])),
                   onTap: () {
                     StoreProvider.of<AppState>(context)
                         .dispatch(ChangeSelectedColor(index: idx));

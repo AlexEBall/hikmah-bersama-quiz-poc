@@ -13,7 +13,6 @@ import 'package:hikmah_bersama_quiz_poc/redux/adMob/adMob_actions.dart';
 import 'package:hikmah_bersama_quiz_poc/constants/constants.dart';
 import 'package:hikmah_bersama_quiz_poc/components/quiz_card.dart';
 import './home.dart';
-import './finished.dart';
 
 // TODO: A view model will help to just pluck the state related to the quiz
 class QuizScreen extends StatelessWidget {
@@ -54,13 +53,16 @@ class QuizPage extends StatelessWidget {
       child: Scaffold(
         key: _key,
         appBar: AppBar(
-          title: Text('Philantropy Questions'),
+          title: Text(
+            'Philantropy Questions',
+            style: TextStyle(color: Colors.white70),
+          ),
           elevation: 0,
         ),
         body: Container(
           decoration: BoxDecoration(color: Theme.of(context).primaryColor),
           child: Stack(
-            children: <Widget>[new QuizCard(state: state)],
+            children: <Widget>[QuizCard(state: state)],
           ),
         ),
       ),
