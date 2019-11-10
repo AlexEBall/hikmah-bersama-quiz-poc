@@ -8,6 +8,7 @@ import 'package:hikmah_bersama_quiz_poc/redux/adMob/adMob_actions.dart';
 import 'package:hikmah_bersama_quiz_poc/components/ui/full_sized_image.dart';
 import 'package:hikmah_bersama_quiz_poc/components/cause/profile_header.dart';
 import 'package:hikmah_bersama_quiz_poc/components/cause/donation_header.dart';
+import 'package:hikmah_bersama_quiz_poc/components/cause/description.dart';
 
 class CauseScreen extends StatelessWidget {
   static const String id = 'cause_screen';
@@ -64,26 +65,6 @@ class CausePage extends StatelessWidget {
             ],
           ),
         ),
-      ),
-    );
-  }
-}
-
-class Description extends StatelessWidget {
-  const Description();
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      padding: EdgeInsets.only(top: 10.0),
-      child: Column(
-        children: <Widget>[
-          Text(
-              "Because of the donations from people like you we're close to reaching our goal"),
-          SizedBox(height: 50.0),
-          Text('You got 9 out of 10 correct!')
-        ],
       ),
     );
   }
