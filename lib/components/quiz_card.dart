@@ -25,7 +25,7 @@ class QuizCard extends StatelessWidget {
       padding: EdgeInsets.all(16.0),
       child: Column(
         children: <Widget>[
-          CardProfile(),
+          CardProfile(state: state),
           SizedBox(height: 10.0),
           Row(
             children: <Widget>[

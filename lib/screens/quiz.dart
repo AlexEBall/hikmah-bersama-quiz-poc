@@ -1,16 +1,14 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:redux/redux.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:firebase_admob/firebase_admob.dart';
-import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 
 import 'package:hikmah_bersama_quiz_poc/redux/app/app_state.dart';
-import 'package:hikmah_bersama_quiz_poc/redux/quiz/quiz_actions.dart';
-import 'package:hikmah_bersama_quiz_poc/redux/processing/processing_actions.dart';
+import 'package:hikmah_bersama_quiz_poc/redux/timer/timer_actions.dart';
 import 'package:hikmah_bersama_quiz_poc/redux/adMob/adMob_actions.dart';
 
-import 'package:hikmah_bersama_quiz_poc/constants/constants.dart';
 import 'package:hikmah_bersama_quiz_poc/components/quiz_card.dart';
 import './home.dart';
 
@@ -21,10 +19,10 @@ class QuizScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StoreConnector<AppState, AppState>(
-      distinct: true,
+      // distinct: true,
       onInit: (store) {
         FirebaseAdMob.instance.initialize(appId: DotEnv().env['AD_MOD_ID']);
-        store.dispatch(IsProcessing(false));
+        store.dispatch(decrement());
         store.dispatch(
             BuildBannerAd(targetingInfo: store.state.adMobState.targetingInfo));
       },
