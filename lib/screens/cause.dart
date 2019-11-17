@@ -24,7 +24,7 @@ class CauseScreen extends StatelessWidget {
       converter: (store) => store.state,
       builder: (context, state) => CausePage(state),
       onDidChange: (state) {
-        print(state.adMobState.bannerAd);
+        // print(state.adMobState.bannerAd);
       },
     );
   }

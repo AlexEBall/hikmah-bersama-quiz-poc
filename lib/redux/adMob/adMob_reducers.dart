@@ -24,7 +24,7 @@ AdMobState _buildBanner(AdMobState state, BuildBannerAd action) {
 AdMobState _destroyBanner(AdMobState state, DestroyBannerAd action) {
   BannerAd banner = state.bannerAd;
 
-  print('am I here?');
+  // print('am I here?');
   // banner = null;
   banner.dispose();
 

@@ -40,23 +40,47 @@ ThunkAction<AppState> oneSecondDelay() {
   };
 }
 
-ThunkAction<AppState> resetQuestionState() {
-  return (Store<AppState> store) async {
-    bool hasASecondPassed =
-        await Future<bool>.delayed(Duration(seconds: 2), () {
-      return true;
-    });
+// ThunkAction<AppState> delayBy(int seconds) {
+//   return (Store<AppState> store) async {
+//     bool hasTimePassed =
+//         await Future<bool>.delayed(Duration(seconds: seconds), () {
+//       return true;
+//     });
 
-    if (hasASecondPassed) {
-      store.dispatch(ResetColors());
+//     return hasTimePassed;
+//   };
+// }
 
-      if (store.state.quizState.currentIndex <
-          store.state.quizState.questions.length - 1) {
-        store.dispatch(IncrementCurrentIndex());
-        store.dispatch(decrement());
-      } else {
-        store.dispatch(NavigateTo(route: CauseScreen.id));
-      }
-    }
-  };
-}
+// ThunkAction<AppState> resetQuestionState(bool skip) {
+//   return (Store<AppState> store) async {
+//     bool hasASecondPassed =
+//         await Future<bool>.delayed(Duration(seconds: 2), () {
+//       return true;
+//     });
+
+//     if (skip) {
+//       // store.dispatch(ResetColors());
+
+//       print('here');
+//       if (store.state.quizState.currentIndex <
+//           store.state.quizState.questions.length - 1) {
+//         store.dispatch(IncrementCurrentIndex());
+//         // store.dispatch(decrement());
+//       } else {
+//         store.dispatch(NavigateTo(route: CauseScreen.id));
+//       }
+//     }
+
+//     if (hasASecondPassed) {
+//       store.dispatch(ResetColors());
+
+//       if (store.state.quizState.currentIndex <
+//           store.state.quizState.questions.length - 1) {
+//         store.dispatch(IncrementCurrentIndex());
+//         store.dispatch(decrement());
+//       } else {
+//         store.dispatch(NavigateTo(route: CauseScreen.id));
+//       }
+//     }
+//   };
+// }

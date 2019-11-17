@@ -12,39 +12,39 @@ import './quiz.dart';
 class HomeScreen extends StatelessWidget {
   static const String id = 'home_screen';
 
-  void _startQuiz(context) {
-    try {
-      Navigator.pop(context);
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (_) => QuizScreen(),
-        ),
-      );
-    } on SocketException catch (_) {
-      StoreProvider.of<AppState>(context).dispatch(IsProcessing(false));
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (_) => ErrorPage(
-            message:
-                "Can't reach the servers, \n Please check your internet connection.",
-          ),
-        ),
-      );
-    } catch (e) {
-      print(e.message);
-      StoreProvider.of<AppState>(context).dispatch(IsProcessing(false));
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (_) => ErrorPage(
-            message: "Unexpected error trying to connect to the API",
-          ),
-        ),
-      );
-    }
-  }
+  // void _startQuiz(context) {
+  //   try {
+  //     Navigator.pop(context);
+  //     Navigator.push(
+  //       context,
+  //       MaterialPageRoute(
+  //         builder: (_) => QuizScreen(),
+  //       ),
+  //     );
+  //   } on SocketException catch (_) {
+  //     StoreProvider.of<AppState>(context).dispatch(IsProcessing(false));
+  //     Navigator.pushReplacement(
+  //       context,
+  //       MaterialPageRoute(
+  //         builder: (_) => ErrorPage(
+  //           message:
+  //               "Can't reach the servers, \n Please check your internet connection.",
+  //         ),
+  //       ),
+  //     );
+  //   } catch (e) {
+  //     print(e.message);
+  //     StoreProvider.of<AppState>(context).dispatch(IsProcessing(false));
+  //     Navigator.pushReplacement(
+  //       context,
+  //       MaterialPageRoute(
+  //         builder: (_) => ErrorPage(
+  //           message: "Unexpected error trying to connect to the API",
+  //         ),
+  //       ),
+  //     );
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -61,10 +61,7 @@ class HomeScreen extends StatelessWidget {
               ClipPath(
                 clipper: WaveClipperOne(),
                 child: Container(
-                  decoration: BoxDecoration(
-                      color: state.processing
-                          ? Colors.red
-                          : Theme.of(context).primaryColor),
+                  decoration: BoxDecoration(color: Colors.red),
                   height: 100,
                 ),
               ),
@@ -77,9 +74,9 @@ class HomeScreen extends StatelessWidget {
                   highlightElevation: 1.0,
                   onPressed: () {
                     // TODO: Use processing for a spinner widget
-                    StoreProvider.of<AppState>(context)
-                        .dispatch(IsProcessing(true));
-                    _startQuiz(context);
+                    // StoreProvider.of<AppState>(context)
+                    //     .dispatch(IsProcessing(true));
+                    // _startQuiz(context);
                   },
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.0),

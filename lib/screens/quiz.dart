@@ -19,10 +19,10 @@ class QuizScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StoreConnector<AppState, AppState>(
-      // distinct: true,
+      distinct: true,
       onInit: (store) {
         FirebaseAdMob.instance.initialize(appId: DotEnv().env['AD_MOD_ID']);
-        store.dispatch(decrement());
+        // store.dispatch(decrement());
         store.dispatch(
             BuildBannerAd(targetingInfo: store.state.adMobState.targetingInfo));
       },
@@ -41,9 +41,9 @@ class QuizPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // state.adMobState.bannerAd
-    //   ..load()
-    //   ..show();
+    state.adMobState.bannerAd
+      ..load()
+      ..show();
     return WillPopScope(
       onWillPop: () {
         return _onWillPop(context);

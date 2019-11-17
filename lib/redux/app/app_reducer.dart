@@ -8,7 +8,7 @@ import 'package:hikmah_bersama_quiz_poc/redux/timer/timer_reducer.dart';
 
 AppState appReducer(AppState state, dynamic action) {
   return new AppState(
-      processing: processingReducer(state.processing, action),
+      // processing: processingReducer(state.processing, action),
       quizState: useQuizReducer(state.quizState, action),
       adMobState: useAdMobReducer(state.adMobState, action),
       slidesState: useSlidesReducer(state.slidesState, action),

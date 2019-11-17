@@ -8,14 +8,15 @@ import 'package:hikmah_bersama_quiz_poc/redux/timer/timer_state.dart';
 
 // @immutable
 class AppState {
-  final bool processing;
+  // final bool processing;
   final QuizState quizState;
   final AdMobState adMobState;
   final SlidesState slidesState;
   final TimerState timerState;
 
   AppState(
-      {@required this.processing,
+      {
+      // @required this.processing,
       @required this.quizState,
       @required this.adMobState,
       @required this.slidesState,
@@ -23,7 +24,7 @@ class AppState {
 
   factory AppState.initial() {
     return AppState(
-        processing: false,
+        // processing: false,
         quizState: QuizState.inital(),
         adMobState: AdMobState.inital(),
         slidesState: SlidesState.inital(),
@@ -31,13 +32,14 @@ class AppState {
   }
 
   AppState copyWith(
-      {bool processing,
+      {
+      // bool processing,
       QuizState quizState,
       AdMobState adMobState,
       SlidesState slidesState,
       TimerState tiemrState}) {
     return AppState(
-        processing: processing ?? this.processing,
+        // processing: processing ?? this.processing,
         quizState: quizState ?? this.quizState,
         adMobState: adMobState ?? this.adMobState,
         slidesState: slidesState ?? this.slidesState,
@@ -49,7 +51,7 @@ class AppState {
       identical(this, other) ||
       other is AppState &&
           runtimeType == other.runtimeType &&
-          processing == other.processing &&
+          // processing == other.processing &&
           quizState == other.quizState &&
           adMobState == other.adMobState &&
           slidesState == other.slidesState &&
@@ -57,7 +59,7 @@ class AppState {
 
   @override
   int get hashCode =>
-      processing.hashCode ^
+      // processing.hashCode ^
       quizState.hashCode ^
       adMobState.hashCode ^
       slidesState.hashCode ^

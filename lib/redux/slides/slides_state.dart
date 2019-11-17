@@ -26,7 +26,7 @@ class SlidesState {
       ),
       Slide(
         title: "Help out",
-        description: "Help families, end hunger",
+        description: "Learn more, help others",
         pathImage: "assets/images/volunteer.png",
         backgroundColor: kSlides3,
       ),
