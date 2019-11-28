@@ -6,6 +6,7 @@ import 'package:hikmah_bersama_quiz_poc/redux/app/app_state.dart';
 import 'package:hikmah_bersama_quiz_poc/screens/cause.dart';
 import 'package:hikmah_bersama_quiz_poc/redux/quiz/quiz_actions.dart';
 import 'package:hikmah_bersama_quiz_poc/redux/timer/timer_actions.dart';
+import 'package:hikmah_bersama_quiz_poc/redux/adMob/adMob_actions.dart';
 import 'package:hikmah_bersama_quiz_poc/redux/navigation/navigation_actions.dart';
 
 import 'package:hikmah_bersama_quiz_poc/utils/delayBy.dart';
@@ -30,8 +31,6 @@ ThunkAction<AppState> nextLogic(int index, String selection) {
     //  show correct answer
     //  navigate to new screen and decrement
     if (selection is String) {
-      // stop time
-
       store.dispatch(Pause(payload: true));
       store.dispatch(ChangeSelectedColor(index: index));
       await delayBy(1);
@@ -42,17 +41,9 @@ ThunkAction<AppState> nextLogic(int index, String selection) {
           store.state.quizState.questions.length - 1) {
         store.dispatch(IncrementCurrentIndex());
       } else {
+        store.dispatch(DestroyBannerAd());
         store.dispatch(NavigateTo(route: CauseScreen.id));
       }
-
-      // store.dispatch(Pause(payload: false));
-      // store.dispatch(decrement());
-      // if (two) {
-      //   store.dispatch(IncrementCurrentIndex());
-      // }
-      // }
-
-      // store.dispatch(resetQuestionState(true));
     }
   };
 }

@@ -18,14 +18,12 @@ class CauseScreen extends StatelessWidget {
     return StoreConnector<AppState, AppState>(
       distinct: true,
       onInit: (store) {
-        // TODO: Get this to work
-        // store.dispatch(DestroyBannerAd());
+        store.dispatch(BuildInterstitialAd(
+            targetingInfo: store.state.adMobState.targetingInfo));
       },
       converter: (store) => store.state,
       builder: (context, state) => CausePage(state),
-      onDidChange: (state) {
-        // print(state.adMobState.bannerAd);
-      },
+      onDidChange: (state) {},
     );
   }
 }
@@ -36,6 +34,10 @@ class CausePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // state.adMobState.bannerAd.dispose();
+    state.adMobState.interstitialAd
+      ..load()
+      ..show();
     return Scaffold(
       body: SafeArea(
         child: Container(

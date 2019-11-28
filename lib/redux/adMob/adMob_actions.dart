@@ -7,4 +7,10 @@ class BuildBannerAd {
   BuildBannerAd({@required this.targetingInfo});
 }
 
+class BuildInterstitialAd {
+  final MobileAdTargetingInfo targetingInfo;
+
+  BuildInterstitialAd({@required this.targetingInfo});
+}
+
 class DestroyBannerAd {}

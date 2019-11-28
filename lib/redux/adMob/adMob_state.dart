@@ -6,26 +6,30 @@ import 'package:firebase_admob/firebase_admob.dart';
 class AdMobState {
   final MobileAdTargetingInfo targetingInfo;
   final BannerAd bannerAd;
+  final InterstitialAd interstitialAd;
 
-  AdMobState({@required this.targetingInfo, this.bannerAd});
+  AdMobState(
+      {@required this.targetingInfo, this.bannerAd, this.interstitialAd});
 
   factory AdMobState.inital() {
     return AdMobState(
       targetingInfo: MobileAdTargetingInfo(
-        testDevices: DotEnv().env['TEST_AD_UNIT'] != null
-            ? [DotEnv().env['TEST_AD_UNIT']]
-            : null,
-        keywords: ['Meditation', 'Philantrophy', 'Breathing', 'Yoga'],
-      ),
+          testDevices: DotEnv().env['TEST_AD_UNIT'] != null
+              ? [DotEnv().env['TEST_AD_UNIT']]
+              : null,
+          keywords: ['Meditation', 'Philantrophy', 'Breathing', 'Yoga'],
+          contentUrl: 'http://www.facebook.com'),
     );
   }
 
   AdMobState copyWith(
-      {MobileAdTargetingInfo targetingInfo, BannerAd bannerAd}) {
+      {MobileAdTargetingInfo targetingInfo,
+      BannerAd bannerAd,
+      InterstitialAd interstitialAd}) {
     return AdMobState(
-      targetingInfo: targetingInfo ?? this.targetingInfo,
-      bannerAd: bannerAd ?? this.bannerAd,
-    );
+        targetingInfo: targetingInfo ?? this.targetingInfo,
+        bannerAd: bannerAd ?? this.bannerAd,
+        interstitialAd: interstitialAd ?? this.interstitialAd);
   }
 
   @override
@@ -34,8 +38,10 @@ class AdMobState {
       other is AdMobState &&
           runtimeType == other.runtimeType &&
           targetingInfo == other.targetingInfo &&
-          bannerAd == other.bannerAd;
+          bannerAd == other.bannerAd &&
+          interstitialAd == other.interstitialAd;
 
   @override
-  int get hashCode => targetingInfo.hashCode ^ bannerAd.hashCode;
+  int get hashCode =>
+      targetingInfo.hashCode ^ bannerAd.hashCode ^ interstitialAd.hashCode;
 }

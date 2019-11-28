@@ -7,9 +7,15 @@ class FullSizeImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FittedBox(
-      child: Image.asset('assets/images/$image.jpg'),
-      fit: BoxFit.fill,
+    return Container(
+      decoration: new BoxDecoration(
+        image: new DecorationImage(
+          image: new AssetImage(
+            'assets/images/$image.jpg',
+          ),
+          fit: BoxFit.fill,
+        ),
+      ),
     );
   }
 }

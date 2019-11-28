@@ -1,4 +1,4 @@
-package com.example.hikmah_bersama_quiz_poc;
+package com.alaya.hikmah_quiz;
 
 import android.os.Bundle;
 import io.flutter.app.FlutterActivity;

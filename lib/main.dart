@@ -17,8 +17,6 @@ import 'package:hikmah_bersama_quiz_poc/screens/finished.dart';
 import 'package:hikmah_bersama_quiz_poc/screens/cause.dart';
 
 Future main() async {
-  // final Store<AppState> _store =
-  //     Store<AppState>(appReducer, initialState: AppState.initialState());
   final store = createStore();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   await DotEnv().load('.env');
@@ -29,7 +27,6 @@ class MyApp extends StatelessWidget {
   final Store<AppState> store;
 
   MyApp({this.store});
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return StoreProvider<AppState>(
