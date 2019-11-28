@@ -4,12 +4,12 @@
 
 First things first, you'll need to install flutter
 
-Here's the [docs]()
+Here's the [docs](https://flutter.dev/docs/get-started/install)
 
 If you're using a mac, I recommend these videos from London App Brewery (Angela Yu)
 
-- [Installing Flutter on Mac (part I)]()
-- [Installing Flutter on Mac (part II)]()
+- [Installing Flutter on Mac (part I)](https://www.youtube.com/watch?v=hL7pkX1Pfko)
+- [Installing Flutter on Mac (part II)](https://www.youtube.com/watch?v=gv1LScpG0jM)
 
 If you're on windows she has videos for that too... I just haven't looked since I use a mac
 
