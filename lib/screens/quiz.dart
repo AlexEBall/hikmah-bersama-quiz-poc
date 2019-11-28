@@ -1,12 +1,9 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:redux/redux.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:firebase_admob/firebase_admob.dart';
 
 import 'package:hikmah_bersama_quiz_poc/redux/app/app_state.dart';
-import 'package:hikmah_bersama_quiz_poc/redux/timer/timer_actions.dart';
 import 'package:hikmah_bersama_quiz_poc/redux/adMob/adMob_actions.dart';
 
 import 'package:hikmah_bersama_quiz_poc/components/quiz/quiz_card.dart';
@@ -40,6 +37,7 @@ class QuizPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: Container(),
         title: Text(
           'Philantropy Questions',
           style: TextStyle(color: Colors.white70),

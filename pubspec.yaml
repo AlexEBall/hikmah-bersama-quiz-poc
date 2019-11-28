@@ -35,6 +35,6 @@ flutter:
     - .env
     - assets/images/
   fonts:
-    - family: UnicaOne
+    - family: IbarraRealNova
       fonts:
-        - asset: assets/fonts/UnicaOne-Regular.ttf
+        - asset: assets/fonts/IbarraRealNova-Regular.ttf

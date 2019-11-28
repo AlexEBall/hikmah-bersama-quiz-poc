@@ -10,10 +10,8 @@ import 'package:hikmah_bersama_quiz_poc/redux/keys.dart';
 import 'package:hikmah_bersama_quiz_poc/constants/constants.dart';
 
 import 'package:hikmah_bersama_quiz_poc/screens/intro.dart';
-import 'package:hikmah_bersama_quiz_poc/screens/home.dart';
 import 'package:hikmah_bersama_quiz_poc/screens/quiz.dart';
 import 'package:hikmah_bersama_quiz_poc/screens/error.dart';
-import 'package:hikmah_bersama_quiz_poc/screens/finished.dart';
 import 'package:hikmah_bersama_quiz_poc/screens/cause.dart';
 
 Future main() async {
@@ -37,7 +35,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primaryColor: kPrimary,
           accentColor: kSecondary,
-          fontFamily: "UnicaOne",
+          fontFamily: "IbarraRealNova",
           buttonColor: kActive,
           buttonTheme: ButtonThemeData(
               buttonColor: kActive,
@@ -49,9 +47,7 @@ class MyApp extends StatelessWidget {
         initialRoute: IntroScreen.id,
         routes: {
           IntroScreen.id: (context) => IntroScreen(),
-          HomeScreen.id: (context) => HomeScreen(),
           QuizScreen.id: (context) => QuizScreen(),
-          QuizFinishedPage.id: (context) => QuizFinishedPage(),
           CauseScreen.id: (context) => CauseScreen(),
           ErrorPage.id: (context) => ErrorPage(),
         },
