@@ -14,11 +14,12 @@ class AdMobState {
   factory AdMobState.inital() {
     return AdMobState(
       targetingInfo: MobileAdTargetingInfo(
-          testDevices: DotEnv().env['TEST_AD_UNIT'] != null
-              ? [DotEnv().env['TEST_AD_UNIT']]
-              : null,
-          keywords: ['Meditation', 'Philantrophy', 'Breathing', 'Yoga'],
-          contentUrl: 'http://www.facebook.com'),
+        testDevices: DotEnv().env['TEST_AD_UNIT'] != null
+            ? [DotEnv().env['TEST_AD_UNIT']]
+            : null,
+        keywords: ['Meditation', 'Philantrophy', 'Breathing', 'Yoga'],
+        // contentUrl: 'http://www.facebook.com'
+      ),
     );
   }
 

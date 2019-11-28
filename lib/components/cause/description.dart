@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class Description extends StatelessWidget {
-  const Description();
+  Description();
 
   @override
   Widget build(BuildContext context) {

@@ -4,7 +4,7 @@ import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:hikmah_bersama_quiz_poc/constants/constants.dart';
 
 class DonationHeader extends StatelessWidget {
-  const DonationHeader();
+  DonationHeader();
 
   @override
   Widget build(BuildContext context) {

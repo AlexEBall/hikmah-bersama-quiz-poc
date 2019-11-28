@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:intro_slider/slide_object.dart';
 import 'package:hikmah_bersama_quiz_poc/constants/constants.dart';
 
+// TODO: This may not have to be held in state
 @immutable
 class SlidesState {
   final List<Slide> slides;

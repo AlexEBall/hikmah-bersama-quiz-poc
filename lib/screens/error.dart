@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// TODO: design new error page
 class ErrorPage extends StatelessWidget {
   static const String id = 'error_screen';
   final String message;

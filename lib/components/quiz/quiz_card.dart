@@ -2,14 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 
 import 'package:hikmah_bersama_quiz_poc/redux/app/app_state.dart';
-import 'package:hikmah_bersama_quiz_poc/redux/quiz/quiz_actions.dart';
 import 'package:hikmah_bersama_quiz_poc/redux/processing/processing_actions.dart';
 
 import 'package:hikmah_bersama_quiz_poc/components/quiz/card_profile.dart';
 import 'package:hikmah_bersama_quiz_poc/constants/constants.dart';
 
 class QuizCard extends StatelessWidget {
-  const QuizCard({
+  QuizCard({
     @required this.state,
   });
 
@@ -76,27 +75,10 @@ class QuizCard extends StatelessWidget {
                         ),
                       ])),
                   onTap: () {
-                    // TODO: All this logic needs to be encapsulated in
-                    // it's own ThunkAction so that logic can be run that
-                    // where async actions can handled better
                     StoreProvider.of<AppState>(context).dispatch(nextLogic(
                         idx,
                         state.quizState.options[state.quizState.currentIndex]
                             [idx]));
-
-                    // StoreProvider.of<AppState>(context)
-                    //     .dispatch(ChangeSelectedColor(index: idx));
-
-                    // StoreProvider.of<AppState>(context)
-                    //     .dispatch(oneSecondDelay());
-
-                    // StoreProvider.of<AppState>(context).dispatch(AddAnswer(
-                    //     selection: state.quizState
-                    //         .options[state.quizState.currentIndex][idx]));
-
-                    // StoreProvider.of<AppState>(context)
-                    //     .dispatch(resetQuestionState());
-                    // _nextSubmit(context);
                   },
                 ),
               );

@@ -16,6 +16,7 @@ const kSlides1 = Color(0xFF69D070);
 const kSlides2 = Color(0xFF5E4C5A);
 const kSlides3 = Color(0xFF55917F);
 
+// TODO: Void method on model
 var kQuestions = [
   {
     'category': 'Islam',

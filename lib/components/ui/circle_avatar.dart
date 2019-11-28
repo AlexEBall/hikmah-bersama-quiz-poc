@@ -4,7 +4,8 @@ class CircleImage extends StatelessWidget {
   final double height;
   final double width;
   final String image;
-  const CircleImage(
+
+  CircleImage(
       {@required this.height, @required this.width, @required this.image});
 
   @override

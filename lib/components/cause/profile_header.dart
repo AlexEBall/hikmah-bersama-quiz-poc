@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:hikmah_bersama_quiz_poc/components/ui/circle_avatar.dart';
 
 class ProfileHeader extends StatelessWidget {
-  const ProfileHeader();
+  ProfileHeader();
 
   @override
   Widget build(BuildContext context) {

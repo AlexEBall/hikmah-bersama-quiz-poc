@@ -2,15 +2,12 @@ import 'package:redux/redux.dart';
 import 'package:redux_thunk/redux_thunk.dart';
 
 import 'package:hikmah_bersama_quiz_poc/redux/app/app_state.dart';
-
-import 'package:hikmah_bersama_quiz_poc/screens/cause.dart';
 import 'package:hikmah_bersama_quiz_poc/redux/quiz/quiz_actions.dart';
 import 'package:hikmah_bersama_quiz_poc/redux/timer/timer_actions.dart';
 import 'package:hikmah_bersama_quiz_poc/redux/adMob/adMob_actions.dart';
 import 'package:hikmah_bersama_quiz_poc/redux/navigation/navigation_actions.dart';
 
 import 'package:hikmah_bersama_quiz_poc/utils/delayBy.dart';
-
 import 'package:hikmah_bersama_quiz_poc/screens/cause.dart';
 
 // TODO: This thunk action can be used to handle

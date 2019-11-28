@@ -18,10 +18,8 @@ dependencies:
   redux: ^3.0.0
   flutter_redux: ^0.5.3
   redux_thunk: ^0.2.1
-  intro_views_flutter: ^2.8.0
   intro_slider: ^2.2.8
   percent_indicator: '^2.1.1'
-  countdown_flutter: ^0.1.1
 
 dev_dependencies:
   # have to use an older version of test

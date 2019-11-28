@@ -43,10 +43,11 @@ AdMobState _buildInerstitial(AdMobState state, BuildInterstitialAd action) {
   return state.copyWith(interstitialAd: interstitial);
 }
 
+// TODO: Work on _destroyBanner
 AdMobState _destroyBanner(AdMobState state, DestroyBannerAd action) {
   BannerAd banner = state.bannerAd;
   banner = null;
 
-  print(banner == null);
+  // print(banner == null);
   return state.copyWith(bannerAd: null);
 }

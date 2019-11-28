@@ -17,8 +17,8 @@ class QuizScreen extends StatelessWidget {
       distinct: true,
       onInit: (store) {
         FirebaseAdMob.instance.initialize(appId: DotEnv().env['AD_MOD_ID']);
-        // store.dispatch(
-        // BuildBannerAd(targetingInfo: store.state.adMobState.targetingInfo));
+        store.dispatch(
+            BuildBannerAd(targetingInfo: store.state.adMobState.targetingInfo));
       },
       converter: (store) => store.state,
       builder: (context, state) => QuizPage(state),

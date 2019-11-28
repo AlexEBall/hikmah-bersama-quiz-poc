@@ -38,19 +38,19 @@ ThunkAction<AppState> decrement() {
   };
 }
 
-class CounterBloc {
-  int _counter = 10;
-  StreamController<int> _countController = StreamController<int>();
+// class CounterBloc {
+//   int _counter = 10;
+//   StreamController<int> _countController = StreamController<int>();
 
-  Stream<int> get counterStream => _countController.stream;
-  StreamSink<int> get counterSink => _countController.sink;
+//   Stream<int> get counterStream => _countController.stream;
+//   StreamSink<int> get counterSink => _countController.sink;
 
-  void increamentCounter() {
-    _counter++;
-    counterSink.add(_counter);
-  }
+//   void increamentCounter() {
+//     _counter++;
+//     counterSink.add(_counter);
+//   }
 
-  void closeStream() {
-    _countController.close();
-  }
-}
+//   void closeStream() {
+//     _countController.close();
+//   }
+// }

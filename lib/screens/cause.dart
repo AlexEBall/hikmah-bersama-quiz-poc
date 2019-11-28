@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-import 'package:firebase_admob/firebase_admob.dart';
 
 import 'package:hikmah_bersama_quiz_poc/redux/app/app_state.dart';
 import 'package:hikmah_bersama_quiz_poc/redux/adMob/adMob_actions.dart';
@@ -34,10 +33,7 @@ class CausePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // state.adMobState.bannerAd.dispose();
-    state.adMobState.interstitialAd
-      ..load()
-      ..show();
+    state.adMobState.bannerAd.dispose();
     return Scaffold(
       body: SafeArea(
         child: Container(
