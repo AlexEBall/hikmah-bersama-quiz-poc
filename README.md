@@ -74,16 +74,15 @@ class YourPage extends StatelessWidget {
 
 Follow this convention when importing
 
+```
 <!-- Block 1: Flutter intermnals and 3rd Parties  -->
-
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 
 <!-- Block 2: Anything related to the store -->
-
 import 'package:hikmah_bersama_quiz_poc/redux/app/app_state.dart';
 
 <!-- Block 3: App level components, constants, utilities -->
-
 import 'package:hikmah_bersama_quiz_poc/components/ui/circle_avatar.dart';
 import 'package:hikmah_bersama_quiz_poc/constants/constants.dart';
+```
